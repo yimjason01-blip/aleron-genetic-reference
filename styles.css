@@ -135,7 +135,7 @@ body { margin: 0; }
 
 /* Guidance: scan the care decision, then expand physician and referral tasks. */
 #gene-library .gl-guidance-toolbar { display:flex; align-items:center; justify-content:space-between; gap:var(--space-inline-module); margin-bottom:var(--space-stack-module); }
-#gene-library .gl-population-switch { display:flex; gap:var(--space-stack-tight); padding:var(--space-stack-tight); background:var(--surface-inset); border-radius:var(--radius-control); }
+#gene-library .gl-population-switch { display:flex; flex-wrap:wrap; width:fit-content; max-width:100%; gap:var(--space-stack-tight); padding:var(--space-stack-tight); background:var(--surface-inset); border-radius:var(--radius-control); }
 #gene-library .gl-population-switch button { border:0; background:transparent; padding:var(--space-stack-related) var(--space-inline-row); border-radius:var(--radius-control); color:var(--text-secondary); }
 #gene-library .gl-population-switch button[aria-pressed=true] { background:var(--surface-card); color:var(--text-primary); font-weight:500; }
 #gene-library .gl-guidance-toolbar select { width:auto; max-width:50%; background:transparent; border:1px solid var(--border-base); }
