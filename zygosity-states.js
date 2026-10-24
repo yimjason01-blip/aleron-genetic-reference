@@ -2455,8 +2455,7 @@ export const zygosityStates = {
       "text": "The breast cancer figure is the cumulative risk to age 70 years (95% CI 28–80%) from the Breast Cancer Family Registry, where 7 of 3,743 women with breast cancer and none of 1,268 controls carried c.7271T>G (Bernstein 2006). A family-based study gives 60% by age 80 years for c.7271T>G and truncating variants pooled (Goldgar 2011). The baseline is US breast cancer by age 70 years from SEER."
     },
     "guides": [
-      "Specific variant c.7271T>G",
-      "One variant"
+      "Specific variant c.7271T>G"
     ]
   },
   {

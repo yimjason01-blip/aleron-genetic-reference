@@ -259,3 +259,14 @@ body { margin: 0; }
 #gene-library .gl-guidance h3{margin:0;font-size:16px;font-weight:500}
 #gene-library .gl-guidance .gl-risk-note{margin:0}
 #gene-library .gl-zygosity+.gl-body{padding-top:0}
+/* Guidance: a two-column what-to-do list, then a resources list in the same grid (24 October 2026). */
+#gene-library .gl-guide-summary,#gene-library .gl-guide-resources{display:grid;grid-template-columns:168px minmax(0,68ch);gap:var(--space-stack-related) var(--space-inline-module);margin:0}
+#gene-library .gl-guide-summary div,#gene-library .gl-guide-resources div{display:contents}
+#gene-library .gl-guide-summary dt,#gene-library .gl-guide-resources dt{font-weight:500}
+#gene-library .gl-guide-summary dd,#gene-library .gl-guide-resources dd{margin:0}
+#gene-library .gl-guide-resources{padding-top:var(--space-stack-field);border-top:1px solid var(--border-base);font-size:14px}
+#gene-library .gl-guide-resources dt{color:var(--text-secondary);font-weight:400}
+#gene-library .gl-guide-resources .gl-source{margin-top:0;color:var(--text-primary)}
+#gene-library .gl-guide-resources small{display:block;font-size:12px;color:var(--text-secondary)}
+@media (max-width:640px){#gene-library .gl-guide-summary,#gene-library .gl-guide-resources{grid-template-columns:1fr;gap:2px}#gene-library .gl-guide-summary dd,#gene-library .gl-guide-resources dd{margin-bottom:var(--space-stack-related)}}
+#gene-library .gl-guide-summary small{display:block;font-size:12px;color:var(--text-secondary)}
