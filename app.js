@@ -4,9 +4,7 @@ import { riskFormat, riskSources } from './risk-format.js?v=risk-format-7';
 import { invitaeGuides, twoCopyGenes } from './invitae-guides.js?v=invitae-3';
 import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-8';
 
-// Only fully closed audits qualify; regenerate this small snapshot from the review register.
-const auditedGenes = new Set(await fetch(new URL('./qa/closed-genes.json', import.meta.url), {cache:'no-store'})
- .then(response => response.ok ? response.json() : []).catch(() => []));
+// Audit check marks removed 24 October 2026: they described the 23 October record audit, not the current pages.
 
 (() => {
  const root = document.getElementById('gene-library');
@@ -45,7 +43,7 @@ const auditedGenes = new Set(await fetch(new URL('./qa/closed-genes.json', impor
  function renderList(){
   root.querySelector('#gl-categories').innerHTML=['All categories','Cancer','Cardiovascular','Metabolic','Other conditions'].map(cat=>`<button type="button" class="gl-category" data-category="${cat}" aria-pressed="${cat===state.category}"><span>${cat}</span><span>${cat==='All categories'?genes.length:genes.filter(g=>g.category===cat).length}</span></button>`).join('');
   const rows=filtered();root.querySelector('#gl-count').textContent=rows.length;
-  root.querySelector('#gl-list').innerHTML=rows.length?rows.map(g=>`<button type="button" class="gl-gene" data-gene="${g.symbol}" aria-pressed="${g.symbol===state.gene}"><strong>${g.symbol}${auditedGenes.has(g.symbol)?'<span title="Full audit complete" aria-label="Full audit complete" style="font-size:13px;margin-left:6px">✓</span>':''}</strong><span class="gl-genename">${escape(g.sub)}</span></button>`).join(''):'<p class="gl-empty">No genes found.</p>';
+  root.querySelector('#gl-list').innerHTML=rows.length?rows.map(g=>`<button type="button" class="gl-gene" data-gene="${g.symbol}" aria-pressed="${g.symbol===state.gene}"><strong>${g.symbol}</strong><span class="gl-genename">${escape(g.sub)}</span></button>`).join(''):'<p class="gl-empty">No genes found.</p>';
  }
  // Every gene uses one reference format: genotype, Overview risk table, Guidance plan, then collapsed detail.
  const groupLabel={women:'Women',men:'Men',all:'Women and men'};
