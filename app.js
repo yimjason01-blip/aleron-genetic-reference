@@ -1,7 +1,7 @@
-import { sources, genes, references, reviewNotice } from './reference-data.js?v=share-1';
+import { sources, genes, references, reviewNotice } from './reference-data.js?v=share-2';
 import { panel, panelCode } from './panel.js?v=panel-8';
-import { riskFormat, riskSources } from './risk-format.js?v=risk-format-7';
-import { invitaeGuides, twoCopyGenes } from './invitae-guides.js?v=invitae-3';
+import { riskFormat, riskSources } from './risk-format.js?v=risk-format-8';
+import { invitaeGuides, twoCopyGenes } from './invitae-guides.js?v=invitae-4';
 import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
 
 // Audit check marks removed 24 October 2026: they described the 23 October record audit, not the current pages.
@@ -104,7 +104,7 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
   const cited=[];
   const src=k=>sources[k]||riskSources[k]||stateSources[k];
   const cite=(keys,internal=false)=>`<span class="gl-cite">${keys.map(k=>{let i=cited.indexOf(k);if(i<0)i=cited.push(k)-1;return `<a href="${internal?'#gl-reference-'+(i+1):src(k).url}" ${internal?'data-reference="'+(i+1)+'"':'target="_blank" rel="noopener noreferrer"'} title="${escape(src(k).label)}" aria-label="Source ${i+1}: ${escape(src(k).label)}">${i+1}</a>`;}).join(',')}</span>`;
-  const sections=items=>items.map(d=>`<section class="gl-section"><h3>${escape(d.title)}</h3><p class="gl-row">${escape(d.text)}${cite(d.sources)}</p></section>`).join('');
+  const sections=items=>items.map(d=>`<section class="gl-section"><h3>${escape(d.title)}</h3>${d.lead?`<p class="gl-row">${escape(d.lead)}</p>`:''}<p class="gl-row">${escape(d.text)}${cite(d.sources)}</p></section>`).join('');
   let body;
   if(state.finding==='vus') {
    body=`<section class="gl-section"><h3>Use clinical and family history</h3><p class="gl-row">Invitae test ${panelCode} reports only pathogenic and likely pathogenic variants. A variant of uncertain significance from another test does not establish this condition; do not apply these estimates or change management based on it.${cite(['acmg'])}</p></section>`;
@@ -128,18 +128,23 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
    if(zst&&zst.risk==='none') main=`<section class="gl-physician-decision"><h3>${escape(zst.noTableTitle||'No personal risk table')}</h3><p>${escape(zst.noTable)}</p></section>`;
    else if(f){
     main=summary+comparisonTable(f,multi?{...r.table,caption:`${r.table.caption} · ${zst.label}`}:r.table,cite);
-    more=f.below.map(below).join('')+about(f.about.map(a=>`<section class="gl-section"><h3>${escape(a.title)}</h3><p class="gl-row">${escape(a.text)}</p></section>`).join(''));
+    more=f.below.map(below).join('')+about(f.about.filter(a=>a.title!=='Association evidence').map(a=>`<section class="gl-section"><h3>${escape(a.title)}</h3><p class="gl-row">${escape(a.text)}</p></section>`).join(''));
    } else { main=summary+riskTable(r.table,cite); more=about(evidence(d)); }
    // Guidance sits on the page under the table, not behind a tab: it is one link (24 October 2026).
    let guidance='';
    if(invitaeGuides[g.symbol]){
     const guides=zst?invitaeGuides[g.symbol].filter(x=>zst.guides.some(l=>x.label.startsWith(l))):invitaeGuides[g.symbol];
     const carrier=!zst&&twoCopyGenes.includes(g.symbol)&&!guides.some(x=>/^One variant/.test(x.label));
-    guidance=`<section class="gl-guidance"><h3>Guidance</h3>${guides.length?`<ul class="gl-guide-list">${guides.map(x=>`<li><a class="gl-source" href="${x.url}" target="_blank" rel="noopener noreferrer">Invitae positive results guide · ${escape(g.symbol)} ${escape(x.label)} ↗</a>${x.date?`<small class="gl-risk-period">Updated ${escape(x.date)}</small>`:''}</li>`).join('')}</ul>`:`<p class="gl-row">Invitae has no positive results guide for this result.</p>`}${carrier?`<p class="gl-risk-note">A carrier does not have the condition; the finding matters for family planning and partner testing.</p>`:''}<p class="gl-risk-note">Invitae genetic counselors: clinconsult@invitae.com.</p></section>`;
+    guidance=`<section class="gl-guidance"><h3>Guidance</h3>${guides.length?`<ul class="gl-guide-list">${guides.map(x=>`<li><a class="gl-source" href="${x.url}#page=${x.tablePage||1}" target="_blank" rel="noopener noreferrer">Management options${guides.length>1?` · ${escape(x.label)}`:''} ↗</a><small class="gl-risk-period">Invitae positive results guide, PDF${x.pages?`, ${x.pages} pages`:''}, opens at the management table${x.date?` · updated ${escape(x.date)}`:''}</small></li>`).join('')}</ul>`:`<p class="gl-row">Invitae has no positive results guide for this result.</p>`}${carrier?`<p class="gl-risk-note">A carrier does not have the condition; the finding matters for family planning and partner testing.</p>`:''}<p class="gl-risk-note">Questions on this result: <a href="mailto:clinconsult@invitae.com">clinconsult@invitae.com</a> or 800-436-3037. The patient can book post-test counseling, included in the test cost, in their Invitae portal.</p></section>`;
    }
    body=main+guidance+more;
   }
-  const details=state.finding==='vus'?'':`<details class="gl-caption gl-plan-evidence"><summary>Clinical detail</summary>${sections(r.details)}</details>${r.otherGenotype&&(!multi||zst.showOtherGenotype)?`<details class="gl-caption"><summary>${escape(r.otherGenotype.title)}</summary><p class="gl-row">${escape(r.otherGenotype.text)}${cite(r.otherGenotype.sources)}</p></details>`:''}`;
+  // Association evidence lives in one place: the figures from the risk record first, then the interpretation and its sources (24 October 2026).
+  const assoc=riskFormat[g.symbol]?.about?.find(a=>a.title==='Association evidence');
+  const clinical=!assoc?r.details:r.details.some(d=>d.title==='Association evidence')
+   ?r.details.map(d=>d.title==='Association evidence'?{...d,lead:assoc.text}:d)
+   :[...r.details,{title:'Association evidence',text:assoc.text,sources:[]}];
+  const details=state.finding==='vus'?'':`<details class="gl-caption gl-plan-evidence"><summary>Clinical detail</summary>${sections(clinical)}</details>${r.otherGenotype&&(!multi||zst.showOtherGenotype)?`<details class="gl-caption"><summary>${escape(r.otherGenotype.title)}</summary><p class="gl-row">${escape(r.otherGenotype.text)}${cite(r.otherGenotype.sources)}</p></details>`:''}`;
   const sourceList=cited.length?`<details class="gl-caption"${r.table.inlineReferences?' data-reference-list':''}><summary>Sources</summary><ol class="gl-sourcelist">${cited.map((k,i)=>`<li${r.table.inlineReferences?' id="gl-reference-'+(i+1)+'" tabindex="-1"':''}><a class="gl-source" href="${src(k).url}" target="_blank" rel="noopener noreferrer">${escape(src(k).label)} ↗</a></li>`).join('')}</ol></details>`:'';
   return `<button type="button" class="gl-back" data-back="true">All genes</button><div class="gl-titleline"><h2>${g.symbol}</h2></div><p class="gl-atm-genotype">${zst?escape(g.sub):escape(r.genotype)} · ${panel[g.symbol].transcript}</p>${zswitch}${zst?'':`<p class="gl-risk-note" role="note">${escape(reviewNotice)}</p>`}<div class="gl-body" aria-live="polite">${body}${details}${sourceList}${zst?`<p class="gl-risk-note gl-review-notice" role="note">${escape(reviewNotice)}</p>`:''}</div>`;
  }
