@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genetic Reference Spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, rules as numbered blocks, two worked example tables. */
+:root {
+  --bg: #f6f8f9; --surface: #ffffff; --fg: #18232b; --muted: #55656f; --rule: #d6dee3;
+  --accent: #0f5c63; --accent-soft: #e2eff0; --na: #8a979f;
+  --display: "Newsreader", Georgia, serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11181d; --surface: #182228; --fg: #e3eaee; --muted: #9aaab3; --rule: #2a3840;
+  --accent: #6cc3ca; --accent-soft: #1c3236; --na: #74848d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11181d; --surface: #182228; --fg: #e3eaee; --muted: #9aaab3; --rule: #2a3840;
+  --accent: #6cc3ca; --accent-soft: #1c3236; --na: #74848d; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font: 15px/1.6 var(--body); }
+.page { max-width: 760px; margin: 0 auto; padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: grid; gap: 8px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+h1 { font: 600 2.1rem/1.15 var(--display); margin: 0; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 0.875rem; margin: 0; }
+.lede { margin: 8px 0 0; max-width: 62ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 12px; font: 500 0.8125rem var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--fg); font-weight: 500; }
+
+section { padding-top: 28px; display: grid; gap: 10px; }
+h2 { font: 600 1.35rem/1.25 var(--display); margin: 0; text-wrap: balance; }
+h2 .n { font: 500 0.8rem var(--mono); color: var(--accent); margin-right: 10px; letter-spacing: 0.04em; vertical-align: 2px; }
+p { margin: 0; max-width: 66ch; }
+ul, ol { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; max-width: 66ch; }
+li::marker { color: var(--muted); }
+.term { font-weight: 600; }
+code { font: 0.85em var(--mono); background: var(--accent-soft); padding: 1px 5px; border-radius: 3px; }
+
+.box { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; display: grid; gap: 8px; }
+.box h3 { margin: 0; font: 600 0.75rem var(--body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.order { counter-reset: o; list-style: none; padding: 0; gap: 8px; }
+.order li { counter-increment: o; display: grid; grid-template-columns: 28px 1fr; align-items: baseline; }
+.order li::before { content: counter(o); font: 500 0.8rem var(--mono); color: var(--accent); }
+
+.scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font-weight: 600; color: var(--muted); font-size: 0.75rem; }
+thead tr:first-child th { color: var(--fg); font-size: 0.8125rem; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+td small { display: block; color: var(--muted); font-size: 0.6875rem; line-height: 1.35; margin-top: 2px; }
+.sx { border-left: 1px solid var(--rule); }
+.na { color: var(--na); }
+.cap { font-size: 0.8125rem; color: var(--muted); }
+
+.words { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+.words dt { font-weight: 600; }
+.words dd { margin: 0; }
+.open { border-left: 3px solid var(--accent); padding-left: 12px; }
+a { color: var(--accent); }
+@media (max-width: 480px) { h1 { font-size: 1.7rem; } .words { grid-template-columns: 1fr; } .words dd { margin-bottom: 6px; } }
+</style>
+
+<div class="page">
+<header>
+  <h1>Genetic Reference Spec</h1>
+  <p class="meta">Physician lookup for the Invitae Comprehensive Genetic Risk Panel (test 16001) · as of 24 October 2026</p>
+  <p class="lede">A physician has an Invitae result in hand. Each gene page answers three questions, in the order a physician needs them: which result is this, how much risk does it carry, and what do I do. Change a rule here first, then in the app.</p>
+  <div class="stats"><span><b>163</b> genes</span><span><b>148</b> with a risk table</span><span>result states built for all <b>163</b> genes</span><span>clinical review <b>pending</b></span></div>
+</header>
+
+<section>
+  <h2><span class="n">01</span>Every page reads in three steps</h2>
+  <div class="box">
+    <ol class="order">
+      <li><span><span class="term">Result.</span> Pick the result printed on the report. It decides which risk table and which guide apply, so it comes first.</span></li>
+      <li><span><span class="term">Risk table.</span> The patient's absolute risk next to an ordinary person's, for the three conditions that matter most.</span></li>
+      <li><span><span class="term">Guidance.</span> Invitae's own guide for that result, linked. We do not write management advice.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">02</span>Step 1: the result</h2>
+  <p>A gene offers the results Invitae writes a guide for, plus the carrier result for recessive genes. Most genes have one result and show it as a fixed line; a switch appears only when there is a real choice. Each option is named in report terms, with the report's wording under it.</p>
+  <dl class="words">
+    <dt>Heterozygous</dt><dd>One variant, one copy affected. For a recessive gene this is a carrier: personal risk is usually normal, and the finding matters for family planning.</dd>
+    <dt>Biallelic</dt><dd>Both copies affected. The report shows it as homozygous, or as two different heterozygous variants. These share one option because they share the same risk and guide. Two different variants count only once shown to sit on opposite copies.</dd>
+    <dt>X-linked</dt><dd>One result line, hemizygous in men and heterozygous in women. The table's Women and Men columns already carry the difference, so there is no sex switch.</dd>
+    <dt>Carrier</dt><dd>For a recessive gene, the heterozygous result shows no risk table, only what it means for the patient and their children.</dd>
+    <dt>Specific variant</dt><dd>A named variant with its own published risk, such as ATM c.7271T&gt;G, is a second choice under its result. It replaces only the table rows its evidence covers. Where no absolute risk is published, it says so instead of showing a table.</dd>
+  </dl>
+  <p>Under the switch: one or two sentences on what the result means, and a check only where it prevents a wrong action. Everything else goes below the table. The table heading names the selected result. A result appears only when it can occur and the gene says something different for it.</p>
+</section>
+
+<section>
+  <h2><span class="n">03</span>Step 2: the risk table</h2>
+  <p>The table answers one question: what risk does this patient face, against an ordinary person of the same sex? Absolute risk comes first because it is what changes a decision; a ratio alone can make a small risk look large.</p>
+  <ul>
+    <li><span class="term">Columns.</span> Women and Men, always separate. Each has Absolute risk, Baseline risk (same outcome, sex and age span in the general population) and Risk comparison (absolute divided by baseline; "about" when the two come from different studies).</li>
+    <li><span class="term">Under every figure,</span> one line naming the age span and who was studied, for example <code>by age 80 years · carrier families</code>.</li>
+    <li><span class="term">At most three rows.</span> Serious conditions first (can kill, cause organ failure or permanent loss of function). Within those, the largest excess risk first. Everything else stays on the page below the table, nothing is deleted.</li>
+    <li><span class="term">Rows never used:</span> composites such as "any cancer", the syndrome itself, outcomes that only follow the diagnosis, and figures resting on a handful of patients.</li>
+  </ul>
+  <dl class="words">
+    <dt>Not established</dt><dd>No published figure.</dd>
+    <dt>Not comparable</dt><dd>Both figures exist but cannot be divided.</dd>
+    <dt>Not applicable</dt><dd>The sex cannot have the condition, or it only occurs with the variant.</dd>
+  </dl>
+  <p class="cap">Example, BRCA2:</p>
+  <div class="scroll"><table>
+    <thead><tr><th rowspan="2">Condition</th><th class="sx" colspan="3">Women</th><th class="sx" colspan="3">Men</th></tr>
+    <tr><th class="sx">Absolute risk</th><th>Baseline risk</th><th>Risk comparison</th><th class="sx">Absolute risk</th><th>Baseline risk</th><th>Risk comparison</th></tr></thead>
+    <tbody><tr><th>Breast cancer</th>
+      <td class="sx">69%<small>by age 80 years · carrier families</small></td><td>10.8%<small>by age 80 years · general population</small></td><td>about 6.4×</td>
+      <td class="sx">3.8%<small>by age 80 years · carrier families</small></td><td>0.0904%<small>by age 80 years · general population</small></td><td>about 42×</td></tr></tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2><span class="n">04</span>Step 3: guidance</h2>
+  <p>Guidance links Labcorp's Invitae positive results guide that matches the selected result. Invitae attaches these guides to the report and keeps them current, so rewriting them would only create a second version to defend. Recessive genes with no carrier guide show one line on what a carrier result means.</p>
+</section>
+
+<section>
+  <h2><span class="n">05</span>Where the numbers come from</h2>
+  <ul>
+    <li><span class="term">Patient figures,</span> best first: studies that test everyone and follow who gets sick, tested relatives, family or clinic cohorts, then frequencies in diagnosed patients as a last resort. A table resting only on diagnosed patients says the screened patient's risk is likely lower.</li>
+    <li><span class="term">Baselines:</span> one figure per condition and sex, shared by every gene. Cancers use SEER. Others use a named registry or population study.</li>
+    <li><span class="term">Every figure</span> links its study. Figures found by literature search also record the quoted sentence.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">06</span>Open items</h2>
+  <ul class="open">
+    <li>No clinician has reviewed any figure. About 650 came from a literature search and have not been re-checked against each paper.</li>
+    <li>The result meanings were condensed from each gene's record and checked gene by gene against it (103 findings, 93 fixed; log in an internal log). No clinician has reviewed them.</li>
+    <li>Specific-variant figures confirmed against the source text: ATM c.7271T&gt;G, BRCA1 c.5096G&gt;A, TP53 c.542G&gt;A, HOXB13 G84E. APC I1307K shows no figure: no published absolute risk could be verified.</li>
+    <li>The list of serious conditions is a judgment call. Changing it re-ranks every table.</li>
+  </ul>
+</section>
+</div>
+
+</html>

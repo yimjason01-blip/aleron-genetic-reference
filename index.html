@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Browse genes, associated conditions, and source-linked clinical guidance.">
+  <title>Genetic reference | Aleron MD</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=zyg-9">
+  <script type="module" src="./app.js?v=zyg-9"></script>
+</head>
+<body>
+<div id="gene-library" aria-label="Genetic reference library">
+  <header class="gl-top"><div class="gl-brand">aleron<sup>MD</sup></div><nav style="display:flex;gap:var(--space-inline-module)"><a href="./spec.html" style="color:inherit;text-underline-offset:3px">Design spec</a></nav></header>
+  <div class="gl-heading"><div><h1>Genetic reference</h1><p class="gl-subtitle">Invitae Comprehensive Genetic Risk Panel</p></div></div>
+  <div class="gl-search"><label class="gl-searchbox"><svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="gl-search" aria-label="Search genes, conditions or subcategories" placeholder="Search genes or conditions"></label></div>
+  <div class="gl-layout"><nav class="gl-rail" aria-label="Disease categories"><div class="gl-categories" id="gl-categories"></div></nav><section class="gl-results" aria-label="Matching genes"><div class="gl-resulttitle"><span>Genes</span><span id="gl-count" aria-live="polite"></span></div><div id="gl-list" class="gl-genelist"></div></section><main class="gl-detail" id="gl-detail" aria-label="Selected gene"></main></div>
+</div>
+<noscript>Enable JavaScript to browse the genetic reference.</noscript>
+</body>
+</html>

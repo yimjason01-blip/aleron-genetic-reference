@@ -1,0 +1,256 @@
+/* Preserves the approved three-column reference design. */
+html { color-scheme: light; }
+body { margin: 0; }
+#gene-library{--paper:#FAF7F2;--ink:#1D1B18;--cream:#F5F1E8;--navy:#252B3D;--gunmetal:#333E48;--slate:#5A6378;--inset:#F1EDE6;--ground:light-dark(var(--paper),var(--navy));--text-primary:light-dark(var(--ink),var(--cream));--text-secondary:light-dark(var(--slate),#C5C5CE);--surface-card:light-dark(#FFFFFF,var(--gunmetal));--surface-inset:light-dark(var(--inset),#20253A);--surface-selected:light-dark(var(--inset),var(--gunmetal));--border-base:light-dark(rgba(29,27,24,.15),rgba(245,241,232,.18));--control-primary-bg:light-dark(var(--ink),var(--cream));--control-primary-fg:light-dark(var(--cream),var(--ink));--space-stack-tight:4px;--space-stack-related:8px;--space-stack-field:16px;--space-stack-module:24px;--space-stack-group:26px;--space-stack-section:44px;--space-inline-related:8px;--space-inline-row:12px;--space-inline-module:16px;--space-layout-column:20px;--space-layout-gutter:32px;--space-inset-control:10px 18px;--radius-control:10px;--voice:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text-primary);background:var(--ground);font:400 14px/1.5 var(--voice);min-height:100dvh;color-scheme:light}
+#gene-library *{box-sizing:border-box}
+#gene-library h1,#gene-library h2,#gene-library h3,#gene-library p{margin:0}
+#gene-library button,#gene-library input,#gene-library select{font:inherit;color:inherit}
+#gene-library button{cursor:pointer}
+#gene-library button:focus-visible,#gene-library input:focus-visible,#gene-library select:focus-visible,#gene-library a:focus-visible{outline:2px solid var(--text-primary);outline-offset:3px}
+#gene-library .gl-top{display:flex;align-items:center;justify-content:space-between;gap:var(--space-inline-module);padding:var(--space-stack-field) var(--space-layout-gutter);border-bottom:1px solid var(--border-base);}
+#gene-library .gl-brand{font-size:21px;letter-spacing:-.8px;font-weight:500}
+#gene-library .gl-brand sup{font-size:10px;letter-spacing:0;margin-left:3px}
+#gene-library .gl-heading{padding:var(--space-stack-module) var(--space-layout-gutter);display:flex;justify-content:space-between;gap:var(--space-inline-module);align-items:flex-end}
+#gene-library h1{font-size:28px;line-height:1.2;font-weight:500;letter-spacing:-.7px}
+#gene-library .gl-subtitle{color:var(--text-secondary);margin-top:var(--space-stack-related)}
+#gene-library .gl-search{padding:0 var(--space-layout-gutter) var(--space-stack-module);display:flex;gap:var(--space-inline-module);align-items:center}
+#gene-library .gl-searchbox{display:flex;align-items:center;gap:var(--space-inline-row);background:var(--surface-inset);border-radius:var(--radius-control);padding:var(--space-inset-control);flex:1}
+#gene-library .gl-searchbox input{width:100%;border:0;outline-offset:4px;background:transparent;min-width:0}
+#gene-library input::placeholder{color:var(--text-secondary);opacity:1}
+#gene-library .gl-searchbox svg{width:16px;height:16px;flex:none}
+#gene-library .gl-layout{display:grid;grid-template-columns:172px 225px minmax(0,1fr);border-top:1px solid var(--border-base);min-height:560px}
+#gene-library .gl-rail{padding:var(--space-stack-module) var(--space-stack-field);border-right:1px solid var(--border-base)}
+#gene-library .gl-label{font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:var(--space-stack-field)}
+#gene-library .gl-categories{display:flex;flex-direction:column;gap:var(--space-stack-related)}
+#gene-library .gl-category{background:transparent;border:0;text-align:left;border-radius:var(--radius-control);padding:var(--space-stack-related) var(--space-inline-row);display:flex;justify-content:space-between;gap:var(--space-inline-related);align-items:center;min-height:40px}
+#gene-library .gl-category[aria-pressed=true]{background:var(--surface-selected);font-weight:500}
+#gene-library .gl-category span:last-child{font-size:12px;font-variant-numeric:tabular-nums;color:var(--text-secondary)}
+#gene-library .gl-results{border-right:1px solid var(--border-base);padding:var(--space-stack-module) var(--space-inline-row)}
+#gene-library .gl-resulttitle{display:flex;justify-content:space-between;gap:var(--space-inline-related);padding:0 var(--space-inline-row);color:var(--text-secondary);font-size:12px;margin-bottom:var(--space-stack-field)}
+#gene-library .gl-gene{border:0;background:transparent;width:100%;text-align:left;border-radius:var(--radius-control);padding:var(--space-stack-field) var(--space-inline-row);display:block}
+#gene-library .gl-gene[aria-pressed=true]{background:var(--surface-selected)}
+#gene-library .gl-gene strong{font-size:17px;letter-spacing:.15px;font-weight:500;display:block}
+#gene-library .gl-gene .gl-genename{font-size:13px;display:block;color:var(--text-secondary);margin-top:var(--space-stack-tight)}
+#gene-library .gl-gene .gl-genecat{display:block;font-size:11px;color:var(--text-secondary);margin-top:var(--space-stack-related)}
+#gene-library .gl-detail{padding:var(--space-stack-module);min-width:0;background:var(--surface-card)}
+#gene-library .gl-titleline{display:flex;align-items:center;justify-content:space-between;gap:var(--space-inline-module)}
+#gene-library h2{font-size:32px;line-height:1.2;letter-spacing:-.6px;font-weight:500}
+#gene-library .gl-association{margin-top:var(--space-stack-module)}
+#gene-library .gl-association label,#gene-library .gl-finding label{display:block;font-size:12px;color:var(--text-secondary);margin-bottom:var(--space-stack-related)}
+#gene-library select{background:var(--surface-inset);border:0;border-radius:var(--radius-control);width:100%;padding:var(--space-inset-control);text-overflow:ellipsis}
+#gene-library .gl-meta{display:flex;flex-wrap:wrap;gap:var(--space-inline-row);font-size:12px;color:var(--text-secondary);margin-top:var(--space-stack-related)}
+#gene-library .gl-tabbar{display:flex;gap:var(--space-inline-module);margin-top:var(--space-stack-module);border-bottom:1px solid var(--border-base)}
+#gene-library .gl-tab{border:0;border-bottom:2px solid transparent;background:transparent;padding:var(--space-stack-related) 0;color:var(--text-secondary)}
+#gene-library .gl-tab[aria-pressed=true]{border-bottom-color:var(--text-primary);color:var(--text-primary);font-weight:500}
+#gene-library .gl-body{padding-top:var(--space-stack-module)}
+#gene-library .gl-finding{margin-bottom:var(--space-stack-group)}
+#gene-library .gl-section+.gl-section{margin-top:var(--space-stack-group)}
+#gene-library h3{font-weight:500;font-size:15px;margin-bottom:var(--space-stack-related)}
+#gene-library .gl-row{margin-top:var(--space-stack-related);font-size:14px}
+#gene-library .gl-source{display:inline-block;font-size:12px;color:var(--text-secondary);text-decoration:underline;text-underline-offset:3px;margin-top:var(--space-stack-related)}
+#gene-library .gl-empty{color:var(--text-secondary);padding:var(--space-stack-field) var(--space-inline-row)}
+#gene-library .gl-caption{font-size:12px;color:var(--text-secondary);margin-top:var(--space-stack-group)}
+#gene-library .gl-sourceentry+.gl-sourceentry{margin-top:var(--space-stack-group)}
+#gene-library .gl-sourceentry p{margin-top:var(--space-stack-related);color:var(--text-secondary);font-size:13px}
+#gene-library .gl-full{width:100%}
+@media(max-width:850px){#gene-library .gl-layout{grid-template-columns:145px 190px minmax(0,1fr)}
+#gene-library .gl-detail{padding:var(--space-stack-field)}
+#gene-library .gl-heading,#gene-library .gl-top,#gene-library .gl-search{padding-left:var(--space-stack-module);padding-right:var(--space-stack-module)}}
+@media(max-width:680px){#gene-library .gl-layout{grid-template-columns:minmax(0,1fr)}
+#gene-library .gl-rail{border-right:0;border-bottom:1px solid var(--border-base);padding:var(--space-stack-field)}
+#gene-library .gl-categories{flex-direction:row;flex-wrap:wrap;gap:var(--space-stack-tight)}
+#gene-library .gl-rail .gl-label,#gene-library .gl-category{font-size:13px;min-height:44px}
+#gene-library .gl-results{border-right:0;border-bottom:1px solid var(--border-base);padding:var(--space-stack-field)}
+#gene-library .gl-genelist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-stack-tight)}
+#gene-library .gl-gene{min-height:88px}
+#gene-library .gl-resulttitle{margin-bottom:var(--space-stack-related)}
+#gene-library .gl-heading{align-items:flex-start}
+#gene-library .gl-detail{padding:var(--space-stack-module)}
+#gene-library h1{font-size:26px}
+#gene-library .gl-titleline{align-items:flex-start}}
+#gene-library .gl-searchbox .search-icon { width: 16px; height: 16px; flex: none; }
+#gene-library .gl-layout { min-height: calc(100dvh - 242px); }
+#gene-library .gl-detail { min-width: 0; }
+#gene-library .gl-back { display: none; background: transparent; border: 0; padding: 0; margin-bottom: var(--space-stack-module); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 680px) {
+  #gene-library .gl-layout { min-height: 0; }
+  #gene-library .gl-detail { display: none; }
+  #gene-library.reading .gl-detail { display: block; }
+  #gene-library.reading .gl-rail, #gene-library.reading .gl-results { display: none; }
+  #gene-library .gl-back { display: inline-block; min-height: 44px; }
+  #gene-library .gl-searchbox input, #gene-library select { font-size: 16px; }
+}
+
+
+#gene-library .gl-care-path { padding: var(--space-stack-field); background: var(--surface-inset); border-radius: var(--radius-control); margin-bottom: var(--space-stack-group); }
+#gene-library .gl-care-path > p { font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-stack-related); }
+#gene-library .gl-care-path > h3 { margin: 0; font-size: 18px; }
+#gene-library .gl-task h4 { margin: 0; font-size: 14px; font-weight: 500; }
+#gene-library .gl-task + .gl-task { margin-top: var(--space-stack-field); }
+#gene-library .gl-task .gl-row { margin-top: var(--space-stack-tight); }
+#gene-library .gl-section > h3 { margin-bottom: var(--space-stack-field); }
+
+#gene-library .gl-risk-summary { margin-top: var(--space-stack-group); }
+#gene-library .gl-risk-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-inline-related); align-items: baseline; }
+#gene-library .gl-risk-heading h3 { margin-bottom: 0; }
+#gene-library .gl-risk-heading span, #gene-library .gl-risk-population, #gene-library .gl-risk-note { color: var(--text-secondary); font-size: 13px; }
+#gene-library .gl-risk-population { margin-top: var(--space-stack-related); }
+#gene-library .gl-risk-table { width: 100%; border-collapse: collapse; margin-top: var(--space-stack-field); font-size: 14px; }
+#gene-library .gl-risk-table th, #gene-library .gl-risk-table td { text-align: left; padding: var(--space-stack-related) var(--space-inline-row) var(--space-stack-related) 0; border-bottom: 1px solid var(--border-base); font-weight: 400; }
+#gene-library .gl-risk-table thead th { color: var(--text-secondary); font-size: 12px; }
+#gene-library .gl-risk-table td { text-align: right; font-variant-numeric: tabular-nums; }
+#gene-library .gl-risk-table th:not(:first-child) { text-align: right; }
+#gene-library .gl-risk-table td:first-of-type { font-size: 19px; font-weight: 500; }
+#gene-library .gl-risk-note { margin-top: var(--space-stack-related); }
+#gene-library .gl-characterization { margin: var(--space-stack-group) 0 0; }
+#gene-library .gl-characterization-row + .gl-characterization-row { margin-top: var(--space-stack-field); }
+#gene-library .gl-characterization dt { font-size: 14px; font-weight: 500; }
+#gene-library .gl-characterization dd { margin: var(--space-stack-tight) 0 0; font-size: 14px; }
+
+#gene-library .gl-context-controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-inline-module); margin-top:var(--space-stack-module); }
+#gene-library .gl-context-controls label, #gene-library .gl-result-picker, #gene-library .gl-cancer-picker { display:block; font-size:12px; color:var(--text-secondary); }
+#gene-library .gl-context-controls select, #gene-library .gl-result-picker select, #gene-library .gl-cancer-picker select { margin-top:var(--space-stack-related); font-size:14px; color:var(--text-primary); }
+#gene-library .gl-result-picker { margin-top:var(--space-stack-field); }
+#gene-library .gl-cancer-picker { margin-bottom:var(--space-stack-related); }
+#gene-library .gl-care-path { margin-top:var(--space-stack-module); }
+#gene-library .gl-matrix-wrap { max-width:100%; overflow-x:auto; margin-top:var(--space-stack-field); }
+#gene-library .gl-cancer-matrix caption { text-align:left; font-size:16px; font-weight:500; margin-bottom:var(--space-stack-field); }
+#gene-library .gl-cancer-matrix { width:100%; border-collapse:collapse; font-size:13px; }
+#gene-library .gl-cancer-matrix th, #gene-library .gl-cancer-matrix td { text-align:left; vertical-align:top; padding:var(--space-stack-field) var(--space-inline-related); border-bottom:1px solid var(--border-base); font-weight:400; }
+#gene-library .gl-cancer-matrix thead th { font-size:12px; color:var(--text-secondary); }
+#gene-library .gl-cancer-matrix button { border:0; background:transparent; text-align:left; padding:0; font-size:14px; width:100%; }
+#gene-library .gl-cancer-matrix strong { font-weight:500; font-size:16px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+#gene-library .gl-cancer-matrix small { display:block; margin-top:var(--space-stack-tight); font-size:11px; white-space:nowrap; color:var(--text-secondary); }
+#gene-library .gl-cancer-matrix .gl-not-applicable { color:var(--text-secondary); }
+#gene-library .gl-cancer-matrix .gl-risk-horizon { white-space:normal; }
+#gene-library .gl-cancer-matrix button strong { text-decoration:underline; text-underline-offset:3px; }
+#gene-library .gl-cancer-matrix .is-current { background:var(--surface-inset); }
+#gene-library .gl-selected-outcome { margin-top:var(--space-stack-group); }
+#gene-library .gl-selected-outcome .gl-characterization { margin-top:var(--space-stack-field); }
+#gene-library .gl-open-guidance { margin-top:var(--space-stack-module); border:0; border-radius:var(--radius-control); padding:var(--space-inset-control); background:var(--surface-inset); }
+@media(max-width:680px){#gene-library .gl-context-controls { grid-template-columns:minmax(0,1fr); } #gene-library .gl-cancer-matrix th, #gene-library .gl-cancer-matrix td { padding:var(--space-stack-related); } }
+
+#gene-library .gl-cancer-matrix .gl-risk-multiplier { display:inline-block; font-size:14px; font-weight:500; margin-left:var(--space-inline-related); }
+#gene-library .gl-cancer-matrix .gl-risk-baseline { white-space:normal; }
+
+/* Guidance: scan the care decision, then expand physician and referral tasks. */
+#gene-library .gl-guidance-toolbar { display:flex; align-items:center; justify-content:space-between; gap:var(--space-inline-module); margin-bottom:var(--space-stack-module); }
+#gene-library .gl-population-switch { display:flex; gap:var(--space-stack-tight); padding:var(--space-stack-tight); background:var(--surface-inset); border-radius:var(--radius-control); }
+#gene-library .gl-population-switch button { border:0; background:transparent; padding:var(--space-stack-related) var(--space-inline-row); border-radius:var(--radius-control); color:var(--text-secondary); }
+#gene-library .gl-population-switch button[aria-pressed=true] { background:var(--surface-card); color:var(--text-primary); font-weight:500; }
+#gene-library .gl-guidance-toolbar select { width:auto; max-width:50%; background:transparent; border:1px solid var(--border-base); }
+#gene-library .gl-care-item { border-top:1px solid var(--border-base); }
+#gene-library .gl-care-item:last-child { border-bottom:1px solid var(--border-base); }
+#gene-library .gl-care-item > h3 { margin:0; }
+#gene-library .gl-care-summary { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) auto; gap:var(--space-inline-module); align-items:center; width:100%; border:0; background:transparent; text-align:left; padding:var(--space-stack-module) var(--space-inline-related); }
+#gene-library .gl-care-summary:hover { background:var(--surface-inset); }
+#gene-library .gl-care-name { font-size:15px; font-weight:500; }
+#gene-library .gl-care-name small { display:block; color:var(--text-secondary); font-size:12px; font-weight:400; margin-top:var(--space-stack-tight); }
+#gene-library .gl-care-decision { font-size:14px; font-weight:400; }
+#gene-library .gl-care-toggle { color:var(--text-secondary); font-size:12px; font-weight:400; text-decoration:underline; text-underline-offset:3px; }
+#gene-library .gl-care-content { padding:var(--space-stack-related) var(--space-inline-related) var(--space-stack-module); }
+#gene-library .gl-care-content[hidden] { display:none; }
+#gene-library .gl-care-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-stack-group); }
+#gene-library .gl-care-heading { margin:0 0 var(--space-stack-field); font-size:16px; font-weight:500; }
+#gene-library .gl-care-columns .gl-task .gl-row { color:var(--text-secondary); }
+#gene-library .gl-care-content .gl-caption { margin-top:var(--space-stack-module); }
+@media(max-width:1000px) { #gene-library .gl-care-columns { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:680px) {
+ #gene-library .gl-guidance-toolbar { gap:var(--space-stack-related); }
+ #gene-library .gl-guidance-toolbar select { max-width:44%; font-size:14px; padding:var(--space-stack-related); }
+ #gene-library .gl-population-switch button { padding:var(--space-stack-related); min-height:44px; }
+ #gene-library .gl-care-summary { grid-template-columns:minmax(0,1fr) auto; gap:var(--space-stack-related); }
+ #gene-library .gl-care-name { grid-column:1; }
+ #gene-library .gl-care-decision { grid-column:1; color:var(--text-secondary); }
+ #gene-library .gl-care-toggle { grid-column:2; grid-row:1 / 3; }
+}
+
+#gene-library .gl-physician-decision { border-left:3px solid var(--text-primary); padding:var(--space-stack-related) var(--space-stack-field); margin-bottom:var(--space-stack-group); }
+#gene-library .gl-physician-decision > p:first-child { font-size:12px; color:var(--text-secondary); margin-bottom:var(--space-stack-tight); }
+#gene-library .gl-physician-decision h3 { font-size:22px; }
+#gene-library .gl-physician-decision > p:last-child { max-width:72ch; }
+#gene-library .gl-action-plan { margin:0; padding-left:var(--space-stack-module); }
+#gene-library .gl-action-plan > li { padding:var(--space-stack-module) 0; border-top:1px solid var(--border-base); }
+#gene-library .gl-action-plan > li::marker { font-size:16px; font-weight:500; }
+#gene-library .gl-action-plan h3 { font-size:17px; margin-bottom:var(--space-stack-related); }
+#gene-library .gl-plan-decision { color:var(--text-secondary); max-width:85ch; }
+#gene-library .gl-action-plan dl { margin:var(--space-stack-field) 0 0; }
+#gene-library .gl-action-plan dl > div { display:grid; grid-template-columns:minmax(140px,1fr) minmax(0,3fr); gap:var(--space-inline-module); margin-top:var(--space-stack-field); }
+#gene-library .gl-action-plan dt { font-weight:500; }
+#gene-library .gl-action-plan dd { margin:0; max-width:75ch; }
+#gene-library .gl-plan-evidence { border-top:1px solid var(--border-base); padding-top:var(--space-stack-module); }
+#gene-library .gl-plan-evidence .gl-section { margin-top:var(--space-stack-module); }
+@media(max-width:850px) { #gene-library .gl-action-plan dl > div { grid-template-columns:minmax(0,1fr); gap:var(--space-stack-tight); } }
+
+#gene-library .gl-recommendation-sources { display:flex; flex-wrap:wrap; column-gap:var(--space-inline-module); }
+
+#gene-library .gl-atm-genotype { font-size:12px; color:var(--text-secondary); margin:var(--space-stack-tight) 0 var(--space-stack-field); }
+#gene-library .gl-atm-variant { border-top:1px solid var(--border-base); margin-top:var(--space-stack-related); padding-top:var(--space-stack-related); }
+
+@media(max-width:680px) {
+ #gene-library .gl-atm-matrix { table-layout:fixed; }
+ #gene-library .gl-atm-matrix th:first-child { width:26%; }
+ #gene-library .gl-atm-matrix strong, #gene-library .gl-atm-matrix small { white-space:normal; overflow-wrap:anywhere; }
+}
+
+/* Each ATM column represents one measure; sex groups share the same structure. */
+#gene-library .gl-atm-matrix { table-layout:fixed; min-width:650px; }
+#gene-library .gl-atm-matrix .gl-atm-cancer-col { width:22%; }
+#gene-library .gl-atm-matrix th:first-child { width:auto; }
+#gene-library .gl-atm-matrix thead tr:first-child th { color:var(--text-primary); font-size:14px; font-weight:500; padding-bottom:var(--space-stack-related); }
+#gene-library .gl-atm-matrix thead th[rowspan] { vertical-align:bottom; }
+#gene-library .gl-atm-matrix thead tr:nth-child(2) th { padding-top:var(--space-stack-related); }
+#gene-library .gl-atm-matrix .gl-atm-sex-start { border-left:1px solid var(--border-base); padding-left:var(--space-stack-field); }
+#gene-library .gl-atm-value { font-size:13px; font-variant-numeric:tabular-nums; }
+#gene-library .gl-atm-unknown { color:var(--text-secondary); font-size:12px; }
+#gene-library .gl-atm-scroll-hint { display:none; }
+@media(max-width:680px) {
+ #gene-library .gl-atm-matrix { min-width:540px; }
+ #gene-library .gl-atm-matrix .gl-atm-cancer-col { width:120px; }
+ #gene-library .gl-atm-scroll-hint { display:block; font-size:12px; color:var(--text-secondary); margin-top:var(--space-stack-related); }
+ #gene-library .gl-atm-matrix th[scope="row"], #gene-library .gl-atm-matrix th[rowspan] { position:sticky; left:0; background:var(--surface-card); }
+}
+
+/* Risk tables with two data columns fit a phone without horizontal scroll. */
+#gene-library .gl-atm-matrix.gl-compact { min-width:0; }
+/* Above phone width the page is a fixed-height shell: header and search stay put, and each column scrolls on its own. */
+@media (min-width: 681px) {
+  #gene-library { height: 100dvh; min-height: 0; display: flex; flex-direction: column; }
+  #gene-library .gl-layout { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); }
+  #gene-library .gl-rail, #gene-library .gl-results, #gene-library .gl-detail { overflow-y: auto; overscroll-behavior: contain; }
+  #gene-library .gl-results { padding-top: 0; }
+  #gene-library .gl-gene { padding: var(--space-stack-related) var(--space-inline-row); }
+  #gene-library .gl-gene strong { font-size: 15px; }
+  #gene-library .gl-gene .gl-genename { margin-top: 0; font-size: 12px; }
+  #gene-library .gl-resulttitle { position: sticky; top: 0; z-index: 1; background: var(--ground); margin: 0 calc(-1 * var(--space-inline-row)) var(--space-stack-related); padding: var(--space-stack-module) calc(2 * var(--space-inline-row)) var(--space-stack-related); }
+}
+#gene-library .gl-cite { font-size: 10px; vertical-align: super; line-height: 0; margin-left: 2px; color: var(--text-secondary); white-space: nowrap; }
+#gene-library .gl-cite a { color: inherit; text-decoration: none; padding: 0 1px; }
+#gene-library .gl-cite a:hover { text-decoration: underline; }
+#gene-library .gl-sourcelist { margin: var(--space-stack-related) 0 0; padding-left: 20px; }
+#gene-library .gl-sourcelist li + li { margin-top: var(--space-stack-tight); }
+#gene-library .gl-sourcelist .gl-source { margin-top: 0; }
+
+#gene-library .gl-cancer-matrix .gl-risk-period { display:block; margin-top:var(--space-stack-tight); font-size:11px; line-height:1.35; color:var(--text-secondary); white-space:normal; overflow-wrap:anywhere; }
+#gene-library .gl-atm-matrix td + td:not(.gl-atm-sex-start),
+#gene-library .gl-atm-matrix thead tr:nth-child(2) th + th:not(.gl-atm-sex-start) { border-left:1px solid var(--border-base); }
+
+#gene-library [data-reference-list] li:focus { outline:1px solid var(--border-base); outline-offset:4px; }
+
+/* Invitae positive results guides on the Guidance tab (24 October 2026). */
+#gene-library .gl-guide-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-stack-related)}
+#gene-library .gl-guide-list .gl-source{font-size:14px;color:var(--text-primary);margin-top:0}
+#gene-library .gl-guide-list small{display:block}
+
+/* Zygosity switch (prototype, 24 October 2026): the result on the report comes before the tabs. */
+#gene-library .gl-zygosity{display:grid;gap:var(--space-stack-related);margin-block:var(--space-stack-related) var(--space-stack-module);padding-block:var(--space-stack-field);border-top:1px solid var(--border-base);border-bottom:1px solid var(--border-base)}
+#gene-library .gl-zygosity-label{margin:0;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-secondary)}
+#gene-library .gl-zygosity-meaning h3{margin:0 0 4px;font-size:15px}
+#gene-library .gl-zygosity-meaning p{margin:0;max-width:68ch}
+#gene-library .gl-zygosity-check{margin-top:6px!important;color:var(--text-secondary);font-size:13px}
+
+#gene-library .gl-zygosity-sub{margin-top:var(--space-stack-field)}
+#gene-library .gl-review-notice{margin-top:var(--space-stack-section)}
+#gene-library .gl-zygosity-switch button{text-align:left}
+#gene-library .gl-zygosity-switch small{display:block;font-size:12px;font-weight:400;color:var(--text-secondary)}
+#gene-library .gl-zygosity-fixed{margin:0}
