@@ -2,7 +2,7 @@ import { sources, genes, references, reviewNotice } from './reference-data.js?v=
 import { panel, panelCode } from './panel.js?v=panel-8';
 import { riskFormat, riskSources } from './risk-format.js?v=risk-format-7';
 import { invitaeGuides, twoCopyGenes } from './invitae-guides.js?v=invitae-3';
-import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-11';
+import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
 
 // Audit check marks removed 24 October 2026: they described the 23 October record audit, not the current pages.
 

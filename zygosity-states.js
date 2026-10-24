@@ -483,6 +483,7 @@ export const zygosityStates = {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
     "risk": "base",
+    "check": "A woman with variants on both copies is rare; her risk is closest to the Men column.",
     "guides": [
       "One variant"
     ],
@@ -539,6 +540,7 @@ export const zygosityStates = {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
     "risk": "base",
+    "check": "A woman with variants on both copies is rare; her risk is closest to the Men column.",
     "guides": [
       "One variant"
     ],
@@ -678,7 +680,7 @@ export const zygosityStates = {
       "One variant"
     ],
     "meaning": "Hemophilia B in every man with a loss-of-function variant. A quarter to a third of carrier women have factor IX below 40 IU/dL; others may bleed with procedures and childbirth.",
-    "check": "Confirm the variant is loss-of-function; factor IX Padua is linked to thrombosis instead."
+    "check": "Confirm the variant is loss-of-function; factor IX Padua is linked to thrombosis instead. A woman with variants on both copies is rare; her risk is closest to the Men column."
   }
 ],
   FBN1: [
@@ -709,6 +711,7 @@ export const zygosityStates = {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
     "risk": "base",
+    "check": "A woman with variants on both copies is rare; her risk is closest to the Men column.",
     "guides": [
       "One variant"
     ],
@@ -823,6 +826,7 @@ export const zygosityStates = {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
     "risk": "base",
+    "check": "A woman with variants on both copies is rare; her risk is closest to the Men column.",
     "guides": [
       "One variant"
     ],
@@ -1105,6 +1109,7 @@ export const zygosityStates = {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
     "risk": "base",
+    "check": "A woman with variants on both copies is rare; her risk is closest to the Men column.",
     "guides": [
       "One variant"
     ],
@@ -1433,6 +1438,7 @@ export const zygosityStates = {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
     "risk": "base",
+    "check": "A woman with variants on both copies is rare; her risk is closest to the Men column.",
     "guides": [
       "One variant"
     ],
@@ -2279,6 +2285,7 @@ export const zygosityStates = {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
     "risk": "base",
+    "check": "A woman with variants on both copies is rare; her risk is closest to the Men column.",
     "guides": [
       "One variant"
     ],
