@@ -20,7 +20,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -32,7 +31,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -44,7 +42,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -56,7 +53,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -69,7 +65,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -81,7 +76,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -160,7 +154,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -182,7 +175,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -194,7 +186,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier, about 1 in 120. Carriers have no biotinidase deficiency.",
@@ -216,7 +207,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -229,7 +219,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -242,7 +231,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -254,7 +242,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -266,7 +253,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -278,7 +264,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [
       "One variant"
@@ -303,7 +288,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -315,7 +299,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -327,7 +310,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -339,7 +321,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -351,7 +332,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -364,7 +344,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -376,7 +355,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -388,7 +366,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -425,7 +402,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -437,7 +413,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -449,7 +424,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -462,7 +436,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -475,7 +448,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -487,7 +459,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -499,7 +470,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -512,7 +482,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -524,7 +493,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -536,7 +504,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -548,7 +515,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -560,7 +526,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -573,7 +538,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -585,7 +549,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -597,7 +560,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -610,7 +572,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -636,7 +597,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [
       "One variant"
@@ -675,7 +635,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [
       "One variant"
@@ -714,7 +673,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -727,7 +685,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -739,7 +696,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -752,7 +708,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -764,7 +719,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -776,7 +730,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -789,7 +742,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -813,7 +765,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier, about 1 in 77 to 100. Carriers do not develop Pompe disease; intermediate enzyme activity does not indicate disease.",
@@ -835,7 +786,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -861,7 +811,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -873,7 +822,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -885,7 +833,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -898,7 +845,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. Digenic hemochromatosis with HFE C282Y is recognized but needs strict proof of pathogenicity.",
@@ -920,7 +866,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -932,7 +877,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. A C282Y heterozygote, about 14% of UK Biobank, has no clinically significant iron overload.",
@@ -954,7 +898,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. Iron overload is rare: 15 published single-variant cases, 10 with a variant in another iron gene.",
@@ -976,7 +919,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -988,7 +930,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1000,7 +941,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1012,7 +952,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "noTableTitle": "No risk figures for this variant",
@@ -1047,7 +986,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1072,7 +1010,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1108,7 +1045,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1120,7 +1056,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1133,7 +1068,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1158,7 +1092,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1171,7 +1104,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1183,7 +1115,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1196,7 +1127,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. LDL cholesterol is normal: 141 against 137 mg/dL in noncarriers in Sardinia.",
@@ -1218,7 +1148,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1231,7 +1160,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1244,7 +1172,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1257,7 +1184,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. A minority, particularly with p.Met694Val, have milder symptoms or raised inflammatory markers.",
@@ -1279,7 +1205,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1291,7 +1216,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1317,7 +1241,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1329,7 +1252,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1341,7 +1263,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. One copy does not cause MSH3 polyposis. A 2026 study found single loss-of-function variants more often in people with colorectal cancer or many polyps, without a lifetime-risk estimate.",
@@ -1363,7 +1284,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1375,7 +1295,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [
       "One variant"
@@ -1399,7 +1318,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1411,7 +1329,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1424,7 +1341,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1436,7 +1352,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1449,7 +1364,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1462,7 +1376,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1474,7 +1387,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1487,7 +1399,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1500,7 +1411,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. A single variant does not raise colorectal cancer risk enough to change screening; a small breast cancer increase has been reported.",
@@ -1522,7 +1432,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1534,7 +1443,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1547,7 +1455,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1560,7 +1467,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1573,7 +1479,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1585,7 +1490,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1598,7 +1502,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1610,7 +1513,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1623,7 +1525,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1636,7 +1537,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1648,7 +1548,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1660,7 +1559,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1672,7 +1570,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1685,7 +1582,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1697,7 +1593,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1709,7 +1604,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1721,7 +1615,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1733,7 +1626,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1745,7 +1637,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1757,7 +1648,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1770,7 +1660,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1783,7 +1672,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1796,7 +1684,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [
       "One variant"
@@ -1821,7 +1708,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1834,7 +1720,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1847,7 +1732,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1860,7 +1744,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1872,7 +1755,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1885,7 +1767,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1897,7 +1778,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1909,7 +1789,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1922,7 +1801,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. PI*MZ (2 to 4% of European ancestry) is not alpha-1 antitrypsin deficiency but raises COPD and cirrhosis risk, sharply with alcohol misuse or fatty liver disease.",
@@ -1945,7 +1823,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1957,7 +1834,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier, with no expected muscle disease. Evidence that one variant causes dilated cardiomyopathy is weak; a cardiomyopathy should not be attributed to it.",
@@ -1979,7 +1855,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -1992,7 +1867,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2004,7 +1878,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2017,7 +1890,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2029,7 +1901,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2042,7 +1913,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2054,7 +1924,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2066,7 +1935,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [
       "One variant"
@@ -2088,7 +1956,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier; no guideline recommends monitoring or treatment. Disease from one TFR2 variant plus HFE C282Y is recognized but needs strict proof of pathogenicity.",
@@ -2111,7 +1978,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2124,7 +1990,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2136,7 +2001,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2149,7 +2013,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2161,7 +2024,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2173,7 +2035,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2186,7 +2047,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2198,7 +2058,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2210,7 +2069,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2222,7 +2080,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2307,7 +2164,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2319,7 +2175,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier. Carriers normally have no phenotype, and no dominant TRDN disease is established.",
@@ -2341,7 +2196,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2353,7 +2207,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2366,7 +2219,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2379,7 +2231,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2392,7 +2243,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2405,7 +2255,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2417,7 +2266,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2430,7 +2278,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Hemizygous in men, heterozygous in women",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2442,7 +2289,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2454,7 +2300,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2466,7 +2311,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2478,7 +2322,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2490,7 +2333,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2515,7 +2357,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2528,7 +2369,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "none",
     "guides": [],
     "meaning": "Carrier, as are about 1 in 90 people. Carriers are not expected to develop Wilson disease and need no copper monitoring.",
@@ -2551,7 +2391,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "risk": "base",
     "guides": [
       "One variant"
@@ -2564,7 +2403,6 @@ export const zygosityStates = {
   {
     "key": "one",
     "label": "Heterozygous",
-    "report": "One variant",
     "meaning": "Raises breast cancer risk in women, pancreatic cancer risk in both sexes, and likely prostate cancer risk. It is not ataxia-telangiectasia and not a reason to avoid radiotherapy.",
     "check": "In an older or previously treated patient, a variant found only in blood may be acquired, not inherited.",
     "risk": "base",

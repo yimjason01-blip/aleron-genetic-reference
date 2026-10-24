@@ -2,7 +2,7 @@ import { sources, genes, references, reviewNotice } from './reference-data.js?v=
 import { panel, panelCode } from './panel.js?v=panel-8';
 import { riskFormat, riskSources } from './risk-format.js?v=risk-format-7';
 import { invitaeGuides, twoCopyGenes } from './invitae-guides.js?v=invitae-3';
-import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-8';
+import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-11';
 
 // Audit check marks removed 24 October 2026: they described the 23 October record audit, not the current pages.
 
@@ -85,7 +85,7 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-8';
   const multi=zs&&zs.length>1, topMulti=zs&&zs.filter(x=>!x.parent).length>1;
   const topState=zs?zs.find(x=>x.key===(zst.parent||zst.key)):null;
   const fixed=zs&&!topMulti?`<p class="gl-zygosity-fixed"><strong>${escape(topState.label)}</strong>${topState.report?` · ${escape(topState.report)}`:''}</p>`:'';
-  const zswitch=zs?`<div class="gl-zygosity"><p class="gl-zygosity-label" id="gl-zygosity-label">Result on the report</p>${topMulti?`<div class="gl-population-switch gl-zygosity-switch" role="group" aria-labelledby="gl-zygosity-label">${zs.filter(x=>!x.parent).map(x=>`<button type="button" data-zygosity="${x.key}" aria-pressed="${x.key===top}">${escape(x.label)}${x.report?`<small>${escape(x.report)}</small>`:''}</button>`).join('')}</div>`:fixed}${sub}<section class="gl-zygosity-meaning"><p>${escape(zst.meaning)}</p>${zst.check?`<p class="gl-zygosity-check">${escape(zst.check)}</p>`:''}</section></div>`:'';
+  const zswitch=zs?`<div class="gl-zygosity"><p class="gl-zygosity-label" id="gl-zygosity-label">Zygosity</p>${topMulti?`<div class="gl-population-switch gl-zygosity-switch" role="group" aria-labelledby="gl-zygosity-label">${zs.filter(x=>!x.parent).map(x=>`<button type="button" data-zygosity="${x.key}" aria-pressed="${x.key===top}">${escape(x.label)}${x.report?`<small>${escape(x.report)}</small>`:''}</button>`).join('')}</div>`:fixed}${sub}<section class="gl-zygosity-meaning"><p>${escape(zst.meaning)}</p>${zst.check?`<p class="gl-zygosity-check">${escape(zst.check)}</p>`:''}</section></div>`:'';
   const tabs=`<div class="gl-tabbar" aria-label="Gene reference views">${['Overview','Guidance'].map(t=>`<button type="button" class="gl-tab" data-tab="${t}" aria-pressed="${t===state.tab}">${t}</button>`).join('')}</div>`;
   const split=Boolean(r.plans.women&&r.plans.men);
   const controls=split?`<div class="gl-guidance-toolbar"><div class="gl-population-switch" role="group" aria-label="Guidance population">${[['women','Women'],['men','Men']].map(([value,label])=>`<button type="button" data-population-filter="${value}" aria-pressed="${state.population===value}">${label}</button>`).join('')}</div></div>`:'';

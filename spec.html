@@ -70,7 +70,7 @@ a { color: var(--accent); }
 <header>
   <h1>Genetic Reference Spec</h1>
   <p class="meta">Physician lookup for the Invitae Comprehensive Genetic Risk Panel (test 16001) · as of 24 October 2026</p>
-  <p class="lede">A physician has an Invitae result in hand. Each gene page answers three questions, in the order a physician needs them: which result is this, how much risk does it carry, and what do I do. Change a rule here first, then in the app.</p>
+  <p class="lede">A physician has an Invitae result in hand. Each gene page answers three questions, in the order a physician needs them: which zygosity is this, how much risk does it carry, and what do I do. Change a rule here first, then in the app.</p>
   <div class="stats"><span><b>163</b> genes</span><span><b>148</b> with a risk table</span><span>result states built for all <b>163</b> genes</span><span>clinical review <b>pending</b></span></div>
 </header>
 
@@ -78,7 +78,7 @@ a { color: var(--accent); }
   <h2><span class="n">01</span>Every page reads in three steps</h2>
   <div class="box">
     <ol class="order">
-      <li><span><span class="term">Result.</span> Pick the result printed on the report. It decides which risk table and which guide apply, so it comes first.</span></li>
+      <li><span><span class="term">Zygosity.</span> Match the zygosity on the report, and the specific variant if one is named. It decides which risk table and which guide apply, so it comes first.</span></li>
       <li><span><span class="term">Risk table.</span> The patient's absolute risk next to an ordinary person's, for the three conditions that matter most.</span></li>
       <li><span><span class="term">Guidance.</span> Invitae's own guide for that result, linked. We do not write management advice.</span></li>
     </ol>
@@ -86,14 +86,14 @@ a { color: var(--accent); }
 </section>
 
 <section>
-  <h2><span class="n">02</span>Step 1: the result</h2>
-  <p>A gene offers the results Invitae writes a guide for, plus the carrier result for recessive genes. Most genes have one result and show it as a fixed line; a switch appears only when there is a real choice. Each option is named in report terms, with the report's wording under it.</p>
+  <h2><span class="n">02</span>Step 1: zygosity</h2>
+  <p>The first row is zygosity. A gene offers the zygosities Invitae writes a guide for, plus the carrier result for recessive genes. Dominant genes have one zygosity and show it as a fixed line; a switch appears only when there is a real choice. The report's wording appears under an option only when it adds something, such as "Homozygous, or two variants" or a variant name.</p>
   <dl class="words">
     <dt>Heterozygous</dt><dd>One variant, one copy affected. For a recessive gene this is a carrier: personal risk is usually normal, and the finding matters for family planning.</dd>
     <dt>Biallelic</dt><dd>Both copies affected. The report shows it as homozygous, or as two different heterozygous variants. These share one option because they share the same risk and guide. Two different variants count only once shown to sit on opposite copies.</dd>
-    <dt>X-linked</dt><dd>One result line, hemizygous in men and heterozygous in women. The table's Women and Men columns already carry the difference, so there is no sex switch.</dd>
+    <dt>X-linked</dt><dd>One line, hemizygous in men (the only copy carries the variant) and heterozygous in women (a normal copy remains). The table's Women and Men columns already carry the difference, so there is no sex switch.</dd>
     <dt>Carrier</dt><dd>For a recessive gene, the heterozygous result shows no risk table, only what it means for the patient and their children.</dd>
-    <dt>Specific variant</dt><dd>A named variant with its own published risk, such as ATM c.7271T&gt;G, is a second choice under its result. It replaces only the table rows its evidence covers. Where no absolute risk is published, it says so instead of showing a table.</dd>
+    <dt>Specific variant</dt><dd>A named variant with its own published risk, such as ATM c.7271T&gt;G, is not a zygosity; it is a second row under its zygosity. It replaces only the table rows its evidence covers. Where no absolute risk is published, it says so instead of showing a table.</dd>
   </dl>
   <p>Under the switch: one or two sentences on what the result means, and a check only where it prevents a wrong action. Everything else goes below the table. The table heading names the selected result. A result appears only when it can occur and the gene says something different for it.</p>
 </section>
@@ -146,5 +146,3 @@ a { color: var(--accent); }
   </ul>
 </section>
 </div>
-
-</html>
