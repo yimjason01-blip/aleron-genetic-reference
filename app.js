@@ -45,7 +45,7 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
   const rows=filtered();root.querySelector('#gl-count').textContent=rows.length;
   root.querySelector('#gl-list').innerHTML=rows.length?rows.map(g=>`<button type="button" class="gl-gene" data-gene="${g.symbol}" aria-pressed="${g.symbol===state.gene}"><strong>${g.symbol}</strong><span class="gl-genename">${escape(g.sub)}</span></button>`).join(''):'<p class="gl-empty">No genes found.</p>';
  }
- // Every gene uses one reference format: genotype, Overview risk table, Guidance plan, then collapsed detail.
+ // Every gene uses one reference format: zygosity, risk table, guidance, then collapsed detail.
  const groupLabel={women:'Women',men:'Men',all:'Women and men'};
  function riskTable(t, cite) {
   const span=t.measures.length;
@@ -65,14 +65,28 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
  function comparisonTable(f, t, cite) {
   if(!f.rows.length) return '<p class="gl-risk-note">No condition on this page has a general-population comparison. Absolute risks are listed under the sections below.</p>';
   const td=(v,first,unknown)=>`<td${first?' class="gl-atm-sex-start"':''}><span class="${unknown?'gl-atm-unknown':'gl-atm-value'}">${escape(v.text)}</span>${v.sources?.length?cite(v.sources):''}${v.line?`<small class="gl-risk-period">${escape(v.line)}</small>`:''}</td>`;
+  // Pooled figures say so under the figure, so the note no longer lists the pooled rows (24 October 2026).
+  const note=f.note||'', pooledList=(note.match(/pool women and men: ([^.]*)\./)||[])[1]||'';
+  const pooled=r=>/pool women and men for every row/.test(note)||pooledList.includes(r.name);
+  const own=(v,r)=>v&&v.line&&pooled(r)&&!/pooled/.test(v.line)?{...v,line:`${v.line} · sexes pooled`}:v;
+  const cells=f.rows.flatMap(r=>[r.women,r.men]).filter(v=>v&&v!=='NA');
+  const has=re=>cells.some(v=>[v.risk?.text,v.baseline?.text,v.ratio].some(x=>x&&re.test(x)));
+  // The legend defines only what this table shows.
+  const legend=[
+   cells.some(v=>/×$/.test(v.ratio||''))?`Risk comparison is absolute risk divided by baseline risk${has(/^about /)?'; "about" means the two come from different studies':''}.`:'',
+   has(/^Not comparable/)?'Not comparable: both figures exist but cannot be divided.':'',
+   has(/^Not applicable/)?'Not applicable: the condition occurs only with the variant.':''];
+  const kept=note.split(/(?<=\.)\s+/).filter(x=>x&&!/pool women and men|is sex-specific/.test(x));
+  const foot=[...kept,...legend].filter(Boolean).join(' ');
   const cell=(row,group)=>{
    const v=row[group];
    if(v==='NA')return '<td class="gl-not-applicable gl-atm-sex-start" colspan="3">Not applicable</td>';
    const none={text:'Not established'};
-   return td(v.risk||none,true,!v.risk)+td(v.baseline||none,false,!v.baseline||v.baseline.na)+td(v.ratio?{text:v.ratio}:none,false,!v.ratio||!/×$/.test(v.ratio));
+   if(!v.risk&&!v.baseline&&!v.ratio)return '<td class="gl-atm-sex-start" colspan="3"><span class="gl-atm-unknown">Not established</span></td>';
+   return td(own(v.risk,row)||none,true,!v.risk)+td(v.baseline||none,false,!v.baseline||v.baseline.na)+td(v.ratio?{text:v.ratio}:none,false,!v.ratio||!/×$/.test(v.ratio));
   };
   const heads=['Absolute risk','Baseline risk','Risk comparison'];
-  return `<div class="gl-matrix-wrap gl-atm-scroll" tabindex="0" role="region" aria-label="${escape(t.caption)}, scroll horizontally on small screens"><table class="gl-cancer-matrix gl-atm-matrix"><caption>${escape(t.caption)}</caption><colgroup><col class="gl-atm-cancer-col"></colgroup><colgroup span="3"></colgroup><colgroup span="3"></colgroup><thead><tr><th scope="col" rowspan="2">${escape(t.rowHeader)}</th>${['Women','Men'].map(s=>`<th class="gl-atm-sex-start" scope="colgroup" colspan="3">${s}</th>`).join('')}</tr><tr>${['women','men'].map(()=>heads.map((h,i)=>`<th${i===0?' class="gl-atm-sex-start"':''} scope="col">${h}</th>`).join('')).join('')}</tr></thead><tbody>${f.rows.map(r=>`<tr><th scope="row">${escape(r.name)}</th>${cell(r,'women')}${cell(r,'men')}</tr>`).join('')}</tbody></table></div><p class="gl-atm-scroll-hint">Scroll horizontally to compare women and men.</p><p class="gl-risk-note">${escape(f.note)} Risk comparison is absolute risk divided by baseline risk; "about" means the two come from different sources. Not comparable: the two cannot be divided. Not established: no published figure. Not applicable: the sex cannot have the condition, or the condition occurs only with the variant.</p>`;
+  return `<div class="gl-matrix-wrap gl-atm-scroll" tabindex="0" role="region" aria-label="${escape(t.caption)}, scroll horizontally on small screens"><table class="gl-cancer-matrix gl-atm-matrix"><caption>${escape(t.caption)}</caption><colgroup><col class="gl-atm-cancer-col"></colgroup><colgroup span="3"></colgroup><colgroup span="3"></colgroup><thead><tr><th scope="col" rowspan="2">${escape(t.rowHeader)}</th>${['Women','Men'].map(s=>`<th class="gl-atm-sex-start" scope="colgroup" colspan="3">${s}</th>`).join('')}</tr><tr>${['women','men'].map(()=>heads.map((h,i)=>`<th${i===0?' class="gl-atm-sex-start"':''} scope="col">${h}</th>`).join('')).join('')}</tr></thead><tbody>${f.rows.map(r=>`<tr><th scope="row">${escape(r.name)}</th>${cell(r,'women')}${cell(r,'men')}</tr>`).join('')}</tbody></table></div><p class="gl-atm-scroll-hint">Scroll horizontally to compare women and men.</p>${foot?`<p class="gl-risk-note">${escape(foot)}</p>`:''}`;
  }
  function renderReference(g, r) {
   // Zygosity first: the selected result decides which risk table and which guides apply (prototype: ATM).
@@ -86,9 +100,6 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
   const topState=zs?zs.find(x=>x.key===(zst.parent||zst.key)):null;
   const fixed=zs&&!topMulti?`<p class="gl-zygosity-fixed"><strong>${escape(topState.label)}</strong>${topState.report?` · ${escape(topState.report)}`:''}</p>`:'';
   const zswitch=zs?`<div class="gl-zygosity"><p class="gl-zygosity-label" id="gl-zygosity-label">Zygosity</p>${topMulti?`<div class="gl-population-switch gl-zygosity-switch" role="group" aria-labelledby="gl-zygosity-label">${zs.filter(x=>!x.parent).map(x=>`<button type="button" data-zygosity="${x.key}" aria-pressed="${x.key===top}">${escape(x.label)}${x.report?`<small>${escape(x.report)}</small>`:''}</button>`).join('')}</div>`:fixed}${sub}<section class="gl-zygosity-meaning"><p>${escape(zst.meaning)}</p>${zst.check?`<p class="gl-zygosity-check">${escape(zst.check)}</p>`:''}</section></div>`:'';
-  const tabs=`<div class="gl-tabbar" aria-label="Gene reference views">${['Overview','Guidance'].map(t=>`<button type="button" class="gl-tab" data-tab="${t}" aria-pressed="${t===state.tab}">${t}</button>`).join('')}</div>`;
-  const split=Boolean(r.plans.women&&r.plans.men);
-  const controls=split?`<div class="gl-guidance-toolbar"><div class="gl-population-switch" role="group" aria-label="Guidance population">${[['women','Women'],['men','Men']].map(([value,label])=>`<button type="button" data-population-filter="${value}" aria-pressed="${state.population===value}">${label}</button>`).join('')}</div></div>`:'';
   // Citations render as numbered links in reading order; the numbered list sits at the end of the view.
   const cited=[];
   const src=k=>sources[k]||riskSources[k]||stateSources[k];
@@ -97,8 +108,7 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
   let body;
   if(state.finding==='vus') {
    body=`<section class="gl-section"><h3>Use clinical and family history</h3><p class="gl-row">Invitae test ${panelCode} reports only pathogenic and likely pathogenic variants. A variant of uncertain significance from another test does not establish this condition; do not apply these estimates or change management based on it.${cite(['acmg'])}</p></section>`;
-  } else if(state.tab==='Overview') {
-   const d=r.riskDetails;
+  } else {
    const evidence=detail=>`${detail.notes.map(n=>`<p class="gl-row">${escape(n)}</p>`).join('')}${detail.sections.map(s=>`<section class="gl-section"><h3>${escape(s.title)}</h3>${s.rows.map((x,i,a)=>`<p class="gl-row">${x.label?`<strong>${escape(x.label)}.</strong> `:''}${escape(x.text)}${i===a.length-1?cite(s.sources):''}</p>`).join('')}</section>`).join('')}`;
    let f=riskFormat[g.symbol];
    if(zst&&zst.risk==='none'){f=null;}
@@ -108,22 +118,30 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-12';
     } else f=zst.risk;
    }
    const study=()=>r.studyDetails?`<details class="gl-caption"><summary>Study details</summary>${evidence(r.studyDetails)}</details>`:'';
-   body=zst&&zst.risk==='none'?`<section class="gl-physician-decision"><h3>${escape(zst.noTableTitle||'No personal risk table')}</h3><p>${escape(zst.noTable)}</p></section>`:f
-    ?`${zst?'':`<p class="gl-row">${escape(r.summary)}</p>`}${comparisonTable(f,multi?{...r.table,caption:`${r.table.caption} · ${zst.label}`}:r.table,cite)}${f.below.map(b=>`<details class="gl-caption"><summary>${escape(b.title)}</summary>${b.items.map(i=>`<section class="gl-section"><h3>${escape(i.name)}</h3><p class="gl-row">${escape(i.text)}${i.sources.length?cite(i.sources):''}</p></section>`).join('')}</details>`).join('')}<details class="gl-caption gl-plan-evidence"><summary>About these estimates</summary>${f.about.map(a=>`<section class="gl-section"><h3>${escape(a.title)}</h3><p class="gl-row">${escape(a.text)}</p></section>`).join('')}${study()}</details>`
-    :`${zst?'':`<p class="gl-row">${escape(r.summary)}</p>`}${riskTable(r.table,cite)}<details class="gl-caption gl-plan-evidence"><summary>About these estimates</summary>${evidence(d)}${study()}</details>`;
-  } else if(invitaeGuides[g.symbol]) {
-   // Guidance is Labcorp's own positive results guides for this gene, linked rather than rewritten (24 October 2026).
-   const guides=zst?invitaeGuides[g.symbol].filter(x=>zst.guides.some(l=>x.label.startsWith(l))):invitaeGuides[g.symbol];
-   const carrier=!zst&&twoCopyGenes.includes(g.symbol)&&!guides.some(x=>/^One variant/.test(x.label));
-   body=`<section class="gl-physician-decision"><h3>Use the Invitae positive results guide that matches the result</h3><p>Labcorp's guides set out the management options for a positive result in this gene, based on current guidelines. They are general, not specific to one patient, and are attached to the Invitae report by default.</p></section>${zst&&!guides.length?`<p class="gl-row">Invitae has no positive results guide for this result.</p>`:''}<ul class="gl-guide-list">${guides.map(x=>`<li><a class="gl-source" href="${x.url}" target="_blank" rel="noopener noreferrer">${escape(g.symbol)} · ${escape(x.label)} ↗</a>${x.date?`<small class="gl-risk-period">Updated ${escape(x.date)}</small>`:''}</li>`).join('')}</ul>${carrier?`<p class="gl-risk-note">One variant only (carrier): Invitae has no guide for this result. A carrier does not have the condition; the finding matters for family planning and partner testing. See "If one copy is affected" under Clinical detail.</p>`:''}<p class="gl-risk-note">Invitae genetic counselors are available to the ordering clinician at clinconsult@invitae.com, and to patients for post-test counseling.</p>`;
-  } else {
-   const plan=r.plans[split?state.population:'all'];
-   const other=r.otherGuidance?.items.filter(i=>!split||!i.populations||i.populations.includes(state.population))||[];
-   body=`${controls}<section class="gl-physician-decision"><h3>${escape(plan.disposition)}</h3><p>${escape(plan.summary)}</p></section><ol class="gl-action-plan">${plan.steps.map(step=>`<li><h3>${escape(step.title)}</h3><p class="gl-plan-decision">${escape(step.decision)}</p><dl>${step.actions.map(([title,text,refs])=>`<div><dt>${escape(title)}</dt><dd>${escape(text)}${cite(refs)}</dd></div>`).join('')}</dl></li>`).join('')}</ol>${r.noSchedule?`<p class="gl-risk-note">${escape(r.noSchedule.text)}${cite(r.noSchedule.sources)}</p>`:''}${other.length?`<details class="gl-caption"><summary>${escape(r.otherGuidance.title)}</summary>${other.map(i=>`<section class="gl-section"><h3>${escape(i.name)}</h3><p class="gl-row">${escape(i.text)}${cite(i.sources)}</p></section>`).join('')}</details>`:''}${r.closingNote?`<p class="gl-risk-note">${escape(r.closingNote)}</p>`:''}`;
+   // Items with no figure share one line instead of repeating "Absolute risk not established" under each name (24 October 2026).
+   const bare=i=>/^Absolute risk not established\.?$/.test(i.text);
+   const below=b=>{const none=b.items.filter(bare), rest=b.items.filter(i=>!bare(i)), refs=none.flatMap(i=>i.sources||[]);
+    return `<details class="gl-caption"><summary>${escape(b.title)}</summary>${rest.map(i=>`<section class="gl-section"><h3>${escape(i.name)}</h3><p class="gl-row">${escape(i.text)}${i.sources.length?cite(i.sources):''}</p></section>`).join('')}${none.length?`<p class="gl-row">No absolute risk established: ${escape(none.map(i=>i.name).join('; '))}.${refs.length?cite([...new Set(refs)]):''}</p>`:''}</details>`;};
+   const about=inner=>`<details class="gl-caption gl-plan-evidence"><summary>About these estimates</summary>${inner}${study()}</details>`;
+   const summary=zst?'':`<p class="gl-row">${escape(r.summary)}</p>`;
+   let main, more='';
+   if(zst&&zst.risk==='none') main=`<section class="gl-physician-decision"><h3>${escape(zst.noTableTitle||'No personal risk table')}</h3><p>${escape(zst.noTable)}</p></section>`;
+   else if(f){
+    main=summary+comparisonTable(f,multi?{...r.table,caption:`${r.table.caption} · ${zst.label}`}:r.table,cite);
+    more=f.below.map(below).join('')+about(f.about.map(a=>`<section class="gl-section"><h3>${escape(a.title)}</h3><p class="gl-row">${escape(a.text)}</p></section>`).join(''));
+   } else { main=summary+riskTable(r.table,cite); more=about(evidence(d)); }
+   // Guidance sits on the page under the table, not behind a tab: it is one link (24 October 2026).
+   let guidance='';
+   if(invitaeGuides[g.symbol]){
+    const guides=zst?invitaeGuides[g.symbol].filter(x=>zst.guides.some(l=>x.label.startsWith(l))):invitaeGuides[g.symbol];
+    const carrier=!zst&&twoCopyGenes.includes(g.symbol)&&!guides.some(x=>/^One variant/.test(x.label));
+    guidance=`<section class="gl-guidance"><h3>Guidance</h3>${guides.length?`<ul class="gl-guide-list">${guides.map(x=>`<li><a class="gl-source" href="${x.url}" target="_blank" rel="noopener noreferrer">Invitae positive results guide · ${escape(g.symbol)} ${escape(x.label)} ↗</a>${x.date?`<small class="gl-risk-period">Updated ${escape(x.date)}</small>`:''}</li>`).join('')}</ul>`:`<p class="gl-row">Invitae has no positive results guide for this result.</p>`}${carrier?`<p class="gl-risk-note">A carrier does not have the condition; the finding matters for family planning and partner testing.</p>`:''}<p class="gl-risk-note">Invitae genetic counselors: clinconsult@invitae.com.</p></section>`;
+   }
+   body=main+guidance+more;
   }
   const details=state.finding==='vus'?'':`<details class="gl-caption gl-plan-evidence"><summary>Clinical detail</summary>${sections(r.details)}</details>${r.otherGenotype&&(!multi||zst.showOtherGenotype)?`<details class="gl-caption"><summary>${escape(r.otherGenotype.title)}</summary><p class="gl-row">${escape(r.otherGenotype.text)}${cite(r.otherGenotype.sources)}</p></details>`:''}`;
   const sourceList=cited.length?`<details class="gl-caption"${r.table.inlineReferences?' data-reference-list':''}><summary>Sources</summary><ol class="gl-sourcelist">${cited.map((k,i)=>`<li${r.table.inlineReferences?' id="gl-reference-'+(i+1)+'" tabindex="-1"':''}><a class="gl-source" href="${src(k).url}" target="_blank" rel="noopener noreferrer">${escape(src(k).label)} ↗</a></li>`).join('')}</ol></details>`:'';
-  return `<button type="button" class="gl-back" data-back="true">All genes</button><div class="gl-titleline"><h2>${g.symbol}</h2></div><p class="gl-atm-genotype">${zst?'':escape(r.genotype)+' · '}${panel[g.symbol].transcript}</p>${zswitch}${tabs}${zst?'':`<p class="gl-risk-note" role="note">${escape(reviewNotice)}</p>`}<div class="gl-body" aria-live="polite">${body}${details}${sourceList}${zst?`<p class="gl-risk-note gl-review-notice" role="note">${escape(reviewNotice)}</p>`:''}</div>`;
+  return `<button type="button" class="gl-back" data-back="true">All genes</button><div class="gl-titleline"><h2>${g.symbol}</h2></div><p class="gl-atm-genotype">${zst?escape(g.sub):escape(r.genotype)} · ${panel[g.symbol].transcript}</p>${zswitch}${zst?'':`<p class="gl-risk-note" role="note">${escape(reviewNotice)}</p>`}<div class="gl-body" aria-live="polite">${body}${details}${sourceList}${zst?`<p class="gl-risk-note gl-review-notice" role="note">${escape(reviewNotice)}</p>`:''}</div>`;
  }
  function renderDetail(){
   const matches=filtered();const box=root.querySelector('#gl-detail');

@@ -254,3 +254,8 @@ body { margin: 0; }
 #gene-library .gl-zygosity-switch button{text-align:left}
 #gene-library .gl-zygosity-switch small{display:block;font-size:12px;font-weight:400;color:var(--text-secondary)}
 #gene-library .gl-zygosity-fixed{margin:0}
+/* Guidance sits under the risk table; its heading matches the table caption (24 October 2026). */
+#gene-library .gl-guidance{margin-top:var(--space-stack-module);display:grid;gap:var(--space-stack-related)}
+#gene-library .gl-guidance h3{margin:0;font-size:16px;font-weight:500}
+#gene-library .gl-guidance .gl-risk-note{margin:0}
+#gene-library .gl-zygosity+.gl-body{padding-top:0}
