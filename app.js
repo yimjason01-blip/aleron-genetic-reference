@@ -3,6 +3,7 @@ import { panel, panelCode } from './panel.js?v=panel-8';
 import { riskFormat, riskSources } from './risk-format.js?v=risk-format-8';
 import { invitaeGuides, twoCopyGenes } from './invitae-guides.js?v=invitae-4';
 import { guidanceSummaries } from './guidance-summaries.js?v=summary-2';
+import { averageRisk, averageRiskFor } from './average-risk.js?v=avg-1';
 import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
 
 // Audit check marks removed 24 October 2026: they described the 23 October record audit, not the current pages.
@@ -147,7 +148,7 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
      if(zst&&r.otherGenotype&&zst.showOtherGenotype) return row('Management',`No Invitae guide covers this result. See "${r.otherGenotype.title}" below.`);
      return row('Management','No Invitae guide covers this result.');
     };
-    const todo=summaries.length?summaries.map(({x,sum},i)=>`${summaries.length>1?`<p class="gl-zygosity-label">${escape(x.label)}</p>`:''}<dl class="gl-guide-summary">${i===0?counsel:''}${sum.rows.map(([t,d])=>`<div><dt>${escape(t)}</dt><dd>${escape(d)}</dd></div>`).join('')}</dl>`).join(''):`<dl class="gl-guide-summary">${counsel}${noGuide()}</dl>`;
+    const todo=summaries.length?summaries.map(({x,sum},i)=>`${summaries.length>1?`<p class="gl-zygosity-label">${escape(x.label)}</p>`:''}<dl class="gl-guide-summary">${i===0?counsel:''}${sum.rows.map(([t,d])=>`<div><dt>${escape(t)}</dt><dd>${escape(d)}${averageRiskFor([t,d]).map(k=>averageRisk[k]).map(a=>`<small class="gl-average">Average risk: ${escape(a.text)} <a href="${a.url}" target="_blank" rel="noopener noreferrer">${escape(a.source)} ↗</a></small>`).join('')}</dd></div>`).join('')}</dl>`).join(''):`<dl class="gl-guide-summary">${counsel}${noGuide()}</dl>`;
     const from=summaries.length?`<p class="gl-risk-note">Summarized from the full guide below, which has the detail and references.</p>`:'';
     const full=guides.length?guides.map(x=>`<a class="gl-source" href="${x.url}#page=${x.tablePage||1}" target="_blank" rel="noopener noreferrer">Invitae positive results guide${guides.length>1?` · ${escape(x.label)}`:''} ↗</a><small>PDF${x.pages?`, ${x.pages} pages`:''}, opens at the management table${x.date?` · updated ${escape(x.date)}`:''}</small>`).join(''):'Invitae has no positive results guide for this result.';
     guidance=`<section class="gl-guidance"><h3>Guidance</h3>${todo}${from}${carrier?`<p class="gl-risk-note">A carrier does not have the condition; the finding matters for family planning and partner testing.</p>`:''}<dl class="gl-guide-resources"><div><dt>Full guide</dt><dd>${full}</dd></div><div><dt>Clinician questions</dt><dd><a href="mailto:clinconsult@invitae.com">clinconsult@invitae.com</a> · 800-436-3037</dd></div></dl></section>`;
