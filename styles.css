@@ -273,3 +273,5 @@ body { margin: 0; }
 /* Average-risk standard under a guidance row: what an ordinary patient gets, for comparison (24 October 2026). */
 #gene-library .gl-guide-summary .gl-average{display:block;margin-top:2px;font-size:12px;color:var(--text-secondary)}
 #gene-library .gl-guide-summary .gl-average a{color:inherit;text-underline-offset:2px}
+/* Patient selector shares the result block with zygosity; a label after a switch gets a field gap (24 October 2026). */
+#gene-library .gl-zygosity > .gl-zygosity-label:not(:first-child){margin-top:var(--space-stack-field)}

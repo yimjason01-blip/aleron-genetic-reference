@@ -20,7 +20,7 @@ export const averageRisk = {
 // several organs, its text matches `group`), its text matches `needs` when given, and its topic does not match `not`.
 // `any` matches the text of any row.
 export const averageRiskMatch = [
- { key: 'breast', topic: /breast/i, group: /breast|mammogra/i, needs: /mammogra|MRI|screen/i, not: /surgery|risk reduction|after/i },
+ { key: 'breast', topic: /breast/i, group: /breast|mammogra/i, needs: /mammogra|MRI|screen/i, not: /surgery|risk reduction|after|\(men\)/i },
  { key: 'colorectal', topic: /colon|colorectal|rectal|polyp/i, group: /colon|colorectal/i },
  { key: 'prostate', topic: /prostate/i, group: /prostate|PSA/ },
  { key: 'pancreas', topic: /pancrea/i, group: /pancrea/i },

@@ -70,7 +70,7 @@ a { color: var(--accent); }
 <header>
   <h1>Genetic Reference Spec</h1>
   <p class="meta">Physician lookup for the Invitae Comprehensive Genetic Risk Panel (test 16001) · as of 24 October 2026</p>
-  <p class="lede">A physician has an Invitae result in hand. Each gene page answers three questions, in the order a physician needs them: which zygosity is this, how much risk does it carry, and what do I do. Change a rule here first, then in the app.</p>
+  <p class="lede">A physician has an Invitae result in hand. Each gene page answers three questions, in the order a physician needs them: who is the patient and which zygosity is this, how much risk does it carry, and what do I do. Change a rule here first, then in the app.</p>
   <div class="stats"><span><b>163</b> genes</span><span><b>148</b> with a risk table</span><span>result states built for all <b>163</b> genes</span><span>clinical review <b>pending</b></span></div>
 </header>
 
@@ -78,7 +78,7 @@ a { color: var(--accent); }
   <h2><span class="n">01</span>Every page reads in three steps</h2>
   <div class="box">
     <ol class="order">
-      <li><span><span class="term">Zygosity.</span> Match the zygosity on the report, and the specific variant if one is named. It decides which risk table and which guide apply, so it comes first.</span></li>
+      <li><span><span class="term">Patient and zygosity.</span> Choose the patient's sex once; it is remembered across genes and the rest of the page shows only what applies to them. Then match the zygosity on the report, and the specific variant if one is named. Together they decide which risk table and which guide apply.</span></li>
       <li><span><span class="term">Risk table.</span> The patient's absolute risk next to an ordinary person's, for the three conditions that matter most.</span></li>
       <li><span><span class="term">Guidance.</span> Invitae's own guide for that result, linked. We do not write management advice.</span></li>
     </ol>
@@ -91,7 +91,7 @@ a { color: var(--accent); }
   <dl class="words">
     <dt>Heterozygous</dt><dd>One variant, one copy affected. For a recessive gene this is a carrier: personal risk is usually normal, and the finding matters for family planning.</dd>
     <dt>Biallelic</dt><dd>Both copies affected. The report shows it as homozygous, or as two different heterozygous variants. These share one option because they share the same risk and guide. Two different variants count only once shown to sit on opposite copies.</dd>
-    <dt>X-linked</dt><dd>One line, hemizygous in men (the only copy carries the variant) and heterozygous in women (a normal copy remains). The table's Women and Men columns already carry the difference, so there is no sex switch. A check line covers the rare woman with variants on both copies: her risk is closest to the Men column. G6PD, which has its own guide for this, offers it as a Biallelic option.</dd>
+    <dt>X-linked</dt><dd>One line, hemizygous in men (the only copy carries the variant) and heterozygous in women (a normal copy remains). The page shows the selected patient's term, "Hemizygous (X-linked)" or "Heterozygous (X-linked)". A check line, shown for women, covers the rare woman with variants on both copies: her risk is closest to the Men column. G6PD, which has its own guide for this, offers it as a Biallelic option.</dd>
     <dt>Carrier</dt><dd>For a recessive gene, the heterozygous result shows no risk table, only what it means for the patient and their children.</dd>
     <dt>Specific variant</dt><dd>A named variant with its own published risk, such as ATM c.7271T&gt;G, is not a zygosity; it is a second row under its zygosity. It replaces only the table rows its evidence covers. Where no absolute risk is published, it says so instead of showing a table.</dd>
   </dl>
@@ -102,10 +102,10 @@ a { color: var(--accent); }
   <h2><span class="n">03</span>Step 2: the risk table</h2>
   <p>The table answers one question: what risk does this patient face, against an ordinary person of the same sex? Absolute risk comes first because it is what changes a decision; a ratio alone can make a small risk look large.</p>
   <ul>
-    <li><span class="term">Columns.</span> Women and Men, always separate. Each has Absolute risk, Baseline risk (same outcome, sex and age span in the general population) and Risk comparison (absolute divided by baseline; "about" when the two come from different studies).</li>
+    <li><span class="term">Columns.</span> Three, for the selected sex only: Absolute risk, Baseline risk (same outcome, sex and age span in the general population) and Risk comparison (absolute divided by baseline; "about" when the two come from different studies). The caption names the sex. A condition the selected sex cannot have is left out; a condition with no figure for that sex shows one "Not established".</li>
     <li><span class="term">Under every figure,</span> one line naming the age span and who was studied, for example <code>by age 80 years · carrier families</code>.</li>
     <li><span class="term">At most three rows.</span> Serious conditions first (can kill, cause organ failure or permanent loss of function). Within those, the largest excess risk first. Everything else stays on the page below the table, nothing is deleted.</li>
-    <li><span class="term">Under the table,</span> a legend defines only the terms that table uses. Pooled figures say "sexes pooled" under the figure. A sex with no figure at all shows one "Not established" across its three columns. Conditions below the table that have no figure share one line.</li>
+    <li><span class="term">Under the table,</span> a legend defines only the terms that table uses. Pooled figures say "sexes pooled" under the figure. Conditions below the table that have no figure share one line.</li>
     <li><span class="term">Rows never used:</span> composites such as "any cancer", the syndrome itself, outcomes that only follow the diagnosis, and figures resting on a handful of patients.</li>
   </ul>
   <dl class="words">
@@ -113,13 +113,12 @@ a { color: var(--accent); }
     <dt>Not comparable</dt><dd>Both figures exist but cannot be divided.</dd>
     <dt>Not applicable</dt><dd>The sex cannot have the condition, or it only occurs with the variant.</dd>
   </dl>
-  <p class="cap">Example, BRCA2:</p>
+  <p class="cap">Example, BRCA2, patient a woman:</p>
   <div class="scroll"><table>
-    <thead><tr><th rowspan="2">Condition</th><th class="sx" colspan="3">Women</th><th class="sx" colspan="3">Men</th></tr>
-    <tr><th class="sx">Absolute risk</th><th>Baseline risk</th><th>Risk comparison</th><th class="sx">Absolute risk</th><th>Baseline risk</th><th>Risk comparison</th></tr></thead>
+    <caption style="text-align:left;padding:7px 10px;font-weight:600">Cancer risk · Women</caption>
+    <thead><tr><th>Condition</th><th class="sx">Absolute risk</th><th>Baseline risk</th><th>Risk comparison</th></tr></thead>
     <tbody><tr><th>Breast cancer</th>
-      <td class="sx">69%<small>by age 80 years · carrier families</small></td><td>10.8%<small>by age 80 years · general population</small></td><td>about 6.4×</td>
-      <td class="sx">3.8%<small>by age 80 years · carrier families</small></td><td>0.0904%<small>by age 80 years · general population</small></td><td>about 42×</td></tr></tbody>
+      <td class="sx">69%<small>by age 80 years · carrier families</small></td><td>10.8%<small>by age 80 years · general population</small></td><td>about 6.4×</td></tr></tbody>
   </table></div>
 </section>
 
@@ -128,7 +127,7 @@ a { color: var(--accent); }
   <p>Guidance sits on the page directly under the table and answers "what do I do". It reads top to bottom:</p>
   <ol class="order">
     <li><span><span class="term">Genetic counseling.</span> First on every gene, because every Invitae guide recommends it. Invitae offers a session at no added cost, booked in the patient's Invitae account. The account comes from Invitae's setup email when the patient's address is on the order, or from invitae.com/patients with the requisition number and date of birth. NSGC's directory covers a local counselor. Workflow: put the patient's email on every requisition and give the patient the requisition number with results.</span></li>
-    <li><span><span class="term">What to do.</span> A short list by organ or task, in our own words, summarized from the Invitae positive results guide for the selected result: test, interval, start age, referral, what to avoid. "Consider" stays "consider". Every summary was checked against its guide. Topics where the guide adds nothing to general-population care share one "No added screening" row. A Family row closes the list. Under each screening row, a small "Average risk" line gives the current USPSTF standard for an ordinary patient, with its year and link, so the physician sees what the variant changes: ATM carriers, PSA every year from age 40; average risk, an individual decision from age 55 to 69. The standards live in one shared table (average-risk.js).</span></li>
+    <li><span><span class="term">What to do.</span> A short list by organ or task, in our own words, summarized from the Invitae positive results guide for the selected result: test, interval, start age, referral, what to avoid. "Consider" stays "consider". Every summary was checked against its guide. Rows for one sex are labeled, "Breast (women)", "Prostate (men)", and only the selected sex's rows appear. Topics where the guide adds nothing to general-population care share one "No added screening" row. A Family row closes the list. Under each screening row, a small "Average risk" line gives the current USPSTF standard for an ordinary patient, with its year and link, so the physician sees what the variant changes: ATM carriers, PSA every year from age 40; average risk, an individual decision from age 55 to 69. The standards live in one shared table (average-risk.js).</span></li>
     <li><span><span class="term">Resources.</span> The full guide (PDF, opens at its management table, page 2 in all 182 guides) and the clinician line, clinconsult@invitae.com or 800-436-3037.</span></li>
   </ol>
   <p>Each summary records the guide date it was written from. When Invitae updates a guide, its summary is re-read before the new date is shown.</p>

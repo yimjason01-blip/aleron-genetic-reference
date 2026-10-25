@@ -1,9 +1,9 @@
-import { sources, genes, references, reviewNotice } from './reference-data.js?v=share-2';
+import { sources, genes, references } from './reference-data.js?v=share-2';
 import { panel, panelCode } from './panel.js?v=panel-8';
 import { riskFormat, riskSources } from './risk-format.js?v=risk-format-8';
 import { invitaeGuides, twoCopyGenes } from './invitae-guides.js?v=invitae-4';
 import { guidanceSummaries } from './guidance-summaries.js?v=summary-2';
-import { averageRisk, averageRiskFor } from './average-risk.js?v=avg-1';
+import { averageRisk, averageRiskFor } from './average-risk.js?v=avg-2';
 import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
 
 // Audit check marks removed 24 October 2026: they described the 23 October record audit, not the current pages.
@@ -64,14 +64,16 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
   return `<div class="gl-matrix-wrap${wide?' gl-atm-scroll':''}" tabindex="0" role="region" aria-label="${escape(t.caption)}${wide?', scroll horizontally on small screens':''}"><table class="gl-cancer-matrix gl-atm-matrix${wide?'':' gl-compact'}"><caption>${escape(t.caption)}</caption><colgroup><col class="gl-atm-cancer-col"></colgroup>${t.groups.map(()=>`<colgroup span="${span}"></colgroup>`).join('')}<thead><tr><th scope="col" rowspan="2">${escape(t.rowHeader)}</th>${t.groups.map(g=>`<th class="gl-atm-sex-start" scope="colgroup" colspan="${span}">${groupLabel[g]}</th>`).join('')}</tr><tr>${t.groups.map(()=>t.measures.map((m,i)=>`<th${i===0?' class="gl-atm-sex-start"':''} scope="col">${escape(m.label)}</th>`).join('')).join('')}</tr></thead><tbody>${t.rows.map(r=>`<tr><th scope="row">${escape(r.name)}</th>${t.groups.map(g=>cell(r,g)).join('')}</tr>`).join('')}</tbody></table></div>${wide?`<p class="gl-atm-scroll-hint">${t.groups.length>1?'Scroll horizontally to compare women and men.':'Scroll horizontally to see every column.'}</p>`:''}<p class="gl-risk-note">${escape(t.note)}</p>`;
  }
  // Risk table under qa/risk-communication-spec.md: absolute risk, baseline risk and risk comparison for women and for men.
- function comparisonTable(f, t, cite) {
-  if(!f.rows.length) return '<p class="gl-risk-note">No condition on this page has a general-population comparison. Absolute risks are listed under the sections below.</p>';
+ function comparisonTable(f, t, cite, sex) {
+  // One sex at a time: the patient selector picks it, so the table shows three columns and drops rows that cannot apply (24 October 2026).
+  const rows=f.rows.filter(r=>r[sex]!=='NA');
+  if(!rows.length) return f.rows.length?`<section class="gl-physician-decision"><h3>No risk table for ${sex}</h3><p>Every condition in this gene's table applies to ${sex==='women'?'men':'women'} only.</p></section>`: '<p class="gl-risk-note">No condition on this page has a general-population comparison. Absolute risks are listed under the sections below.</p>';
   const td=(v,first,unknown)=>`<td${first?' class="gl-atm-sex-start"':''}><span class="${unknown?'gl-atm-unknown':'gl-atm-value'}">${escape(v.text)}</span>${v.sources?.length?cite(v.sources):''}${v.line?`<small class="gl-risk-period">${escape(v.line)}</small>`:''}</td>`;
   // Pooled figures say so under the figure, so the note no longer lists the pooled rows (24 October 2026).
   const note=f.note||'', pooledList=(note.match(/pool women and men: ([^.]*)\./)||[])[1]||'';
   const pooled=r=>/pool women and men for every row/.test(note)||pooledList.includes(r.name);
   const own=(v,r)=>v&&v.line&&pooled(r)&&!/pooled/.test(v.line)?{...v,line:`${v.line} · sexes pooled`}:v;
-  const cells=f.rows.flatMap(r=>[r.women,r.men]).filter(v=>v&&v!=='NA');
+  const cells=rows.map(r=>r[sex]).filter(v=>v&&v!=='NA');
   const has=re=>cells.some(v=>[v.risk?.text,v.baseline?.text,v.ratio].some(x=>x&&re.test(x)));
   // The legend defines only what this table shows.
   const legend=[
@@ -88,8 +90,11 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
    return td(own(v.risk,row)||none,true,!v.risk)+td(v.baseline||none,false,!v.baseline||v.baseline.na)+td(v.ratio?{text:v.ratio}:none,false,!v.ratio||!/×$/.test(v.ratio));
   };
   const heads=['Absolute risk','Baseline risk','Risk comparison'];
-  return `<div class="gl-matrix-wrap gl-atm-scroll" tabindex="0" role="region" aria-label="${escape(t.caption)}, scroll horizontally on small screens"><table class="gl-cancer-matrix gl-atm-matrix"><caption>${escape(t.caption)}</caption><colgroup><col class="gl-atm-cancer-col"></colgroup><colgroup span="3"></colgroup><colgroup span="3"></colgroup><thead><tr><th scope="col" rowspan="2">${escape(t.rowHeader)}</th>${['Women','Men'].map(s=>`<th class="gl-atm-sex-start" scope="colgroup" colspan="3">${s}</th>`).join('')}</tr><tr>${['women','men'].map(()=>heads.map((h,i)=>`<th${i===0?' class="gl-atm-sex-start"':''} scope="col">${h}</th>`).join('')).join('')}</tr></thead><tbody>${f.rows.map(r=>`<tr><th scope="row">${escape(r.name)}</th>${cell(r,'women')}${cell(r,'men')}</tr>`).join('')}</tbody></table></div><p class="gl-atm-scroll-hint">Scroll horizontally to compare women and men.</p>${foot?`<p class="gl-risk-note">${escape(foot)}</p>`:''}`;
+  const caption=`${t.caption} · ${sex==='women'?'Women':'Men'}`;
+  return `<div class="gl-matrix-wrap" tabindex="0" role="region" aria-label="${escape(caption)}"><table class="gl-cancer-matrix gl-atm-matrix gl-compact"><caption>${escape(caption)}</caption><colgroup><col class="gl-atm-cancer-col"></colgroup><colgroup span="3"></colgroup><thead><tr><th scope="col">${escape(t.rowHeader)}</th>${heads.map((h,i)=>`<th${i===0?' class="gl-atm-sex-start"':''} scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr><th scope="row">${escape(r.name)}</th>${cell(r,sex)}</tr>`).join('')}</tbody></table></div>${foot?`<p class="gl-risk-note">${escape(foot)}</p>`:''}`;
  }
+ // X-linked results read as one line for both sexes in the data; the page shows the selected patient's term.
+ const shownLabel=st=>st.label==='Hemizygous in men, heterozygous in women'?(state.population==='men'?'Hemizygous (X-linked)':'Heterozygous (X-linked)'):st.label;
  function renderReference(g, r) {
   // Zygosity first: the selected result decides which risk table and which guides apply (prototype: ATM).
   const zs=zygosityStates[g.symbol];
@@ -100,8 +105,10 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
   const sub=subs.length?`<div class="gl-zygosity-sub"><p class="gl-zygosity-label" id="gl-zygosity-sub-label">Specific variant</p><div class="gl-population-switch gl-zygosity-switch" role="group" aria-labelledby="gl-zygosity-sub-label"><button type="button" data-zygosity="${top}" aria-pressed="${zst.key===top}">Any other variant</button>${subs.map(x=>`<button type="button" data-zygosity="${x.key}" aria-pressed="${x===zst}">${escape(x.label)}</button>`).join('')}</div></div>`:'';
   const multi=zs&&zs.length>1, topMulti=zs&&zs.filter(x=>!x.parent).length>1;
   const topState=zs?zs.find(x=>x.key===(zst.parent||zst.key)):null;
-  const fixed=zs&&!topMulti?`<p class="gl-zygosity-fixed"><strong>${escape(topState.label)}</strong>${topState.report?` · ${escape(topState.report)}`:''}</p>`:'';
-  const zswitch=zs?`<div class="gl-zygosity"><p class="gl-zygosity-label" id="gl-zygosity-label">Zygosity</p>${topMulti?`<div class="gl-population-switch gl-zygosity-switch" role="group" aria-labelledby="gl-zygosity-label">${zs.filter(x=>!x.parent).map(x=>`<button type="button" data-zygosity="${x.key}" aria-pressed="${x.key===top}">${escape(x.label)}${x.report?`<small>${escape(x.report)}</small>`:''}</button>`).join('')}</div>`:fixed}${sub}<section class="gl-zygosity-meaning"><p>${escape(zst.meaning)}</p>${zst.check?`<p class="gl-zygosity-check">${escape(zst.check)}</p>`:''}</section></div>`:'';
+  const fixed=zs&&!topMulti?`<p class="gl-zygosity-fixed"><strong>${escape(shownLabel(topState))}</strong>${topState.report?` · ${escape(topState.report)}`:''}</p>`:'';
+  // Patient sex comes first: it filters the table, the guidance rows and the X-linked zygosity line (24 October 2026).
+  const patient=`<p class="gl-zygosity-label" id="gl-patient-label">Patient</p><div class="gl-population-switch gl-zygosity-switch" role="group" aria-labelledby="gl-patient-label">${[['women','Woman'],['men','Man']].map(([v,l])=>`<button type="button" data-population-filter="${v}" aria-pressed="${state.population===v}">${l}</button>`).join('')}</div>`;
+  const zswitch=zs?`<div class="gl-zygosity">${patient}<p class="gl-zygosity-label" id="gl-zygosity-label">Zygosity</p>${topMulti?`<div class="gl-population-switch gl-zygosity-switch" role="group" aria-labelledby="gl-zygosity-label">${zs.filter(x=>!x.parent).map(x=>`<button type="button" data-zygosity="${x.key}" aria-pressed="${x.key===top}">${escape(x.label)}${x.report?`<small>${escape(x.report)}</small>`:''}</button>`).join('')}</div>`:fixed}${sub}<section class="gl-zygosity-meaning"><p>${escape(zst.meaning)}</p>${zst.check&&!(state.population==='men'&&/^A woman with variants on both copies/.test(zst.check))?`<p class="gl-zygosity-check">${escape(zst.check)}</p>`:''}</section></div>`:'';
   // Citations render as numbered links in reading order; the numbered list sits at the end of the view.
   const cited=[];
   const src=k=>sources[k]||riskSources[k]||stateSources[k];
@@ -129,7 +136,7 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
    let main, more='';
    if(zst&&zst.risk==='none') main=`<section class="gl-physician-decision"><h3>${escape(zst.noTableTitle||'No personal risk table')}</h3><p>${escape(zst.noTable)}</p></section>`;
    else if(f){
-    main=summary+comparisonTable(f,multi?{...r.table,caption:`${r.table.caption} · ${zst.label}`}:r.table,cite);
+    main=summary+comparisonTable(f,multi?{...r.table,caption:`${r.table.caption} · ${shownLabel(zst)}`}:r.table,cite,state.population);
     more=f.below.map(below).join('')+about(f.about.filter(a=>a.title!=='Association evidence').map(a=>`<section class="gl-section"><h3>${escape(a.title)}</h3><p class="gl-row">${escape(a.text)}</p></section>`).join(''));
    } else { main=summary+riskTable(r.table,cite); more=about(evidence(d)); }
    // Guidance sits on the page under the table, not behind a tab: it is one link (24 October 2026).
@@ -148,10 +155,9 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
      if(zst&&r.otherGenotype&&zst.showOtherGenotype) return row('Management',`No Invitae guide covers this result. See "${r.otherGenotype.title}" below.`);
      return row('Management','No Invitae guide covers this result.');
     };
-    const todo=summaries.length?summaries.map(({x,sum},i)=>`${summaries.length>1?`<p class="gl-zygosity-label">${escape(x.label)}</p>`:''}<dl class="gl-guide-summary">${i===0?counsel:''}${sum.rows.map(([t,d])=>`<div><dt>${escape(t)}</dt><dd>${escape(d)}${averageRiskFor([t,d]).map(k=>averageRisk[k]).map(a=>`<small class="gl-average">Average risk: ${escape(a.text)} <a href="${a.url}" target="_blank" rel="noopener noreferrer">${escape(a.source)} ↗</a></small>`).join('')}</dd></div>`).join('')}</dl>`).join(''):`<dl class="gl-guide-summary">${counsel}${noGuide()}</dl>`;
-    const from=summaries.length?`<p class="gl-risk-note">Summarized from the full guide below, which has the detail and references.</p>`:'';
+    const todo=summaries.length?summaries.map(({x,sum},i)=>`${summaries.length>1?`<p class="gl-zygosity-label">${escape(x.label)}</p>`:''}<dl class="gl-guide-summary">${i===0?counsel:''}${sum.rows.filter(([t])=>!/\((women|men)\)/i.test(t)||t.toLowerCase().includes(`(${state.population})`)).map(([t,d])=>`<div><dt>${escape(t)}</dt><dd>${escape(d)}${averageRiskFor([t,d]).map(k=>averageRisk[k]).map(a=>`<small class="gl-average">Average risk: ${escape(a.text)} <a href="${a.url}" target="_blank" rel="noopener noreferrer">${escape(a.source)} ↗</a></small>`).join('')}</dd></div>`).join('')}</dl>`).join(''):`<dl class="gl-guide-summary">${counsel}${noGuide()}</dl>`;
     const full=guides.length?guides.map(x=>`<a class="gl-source" href="${x.url}#page=${x.tablePage||1}" target="_blank" rel="noopener noreferrer">Invitae positive results guide${guides.length>1?` · ${escape(x.label)}`:''} ↗</a><small>PDF${x.pages?`, ${x.pages} pages`:''}, opens at the management table${x.date?` · updated ${escape(x.date)}`:''}</small>`).join(''):'Invitae has no positive results guide for this result.';
-    guidance=`<section class="gl-guidance"><h3>Guidance</h3>${todo}${from}${carrier?`<p class="gl-risk-note">A carrier does not have the condition; the finding matters for family planning and partner testing.</p>`:''}<dl class="gl-guide-resources"><div><dt>Full guide</dt><dd>${full}</dd></div><div><dt>Clinician questions</dt><dd><a href="mailto:clinconsult@invitae.com">clinconsult@invitae.com</a> · 800-436-3037</dd></div></dl></section>`;
+    guidance=`<section class="gl-guidance"><h3>Guidance</h3>${todo}${carrier?`<p class="gl-risk-note">A carrier does not have the condition; the finding matters for family planning and partner testing.</p>`:''}<dl class="gl-guide-resources"><div><dt>Full guide</dt><dd>${full}</dd></div><div><dt>Clinician questions</dt><dd><a href="mailto:clinconsult@invitae.com">clinconsult@invitae.com</a> · 800-436-3037</dd></div></dl></section>`;
    }
    body=main+guidance+more;
   }
@@ -162,7 +168,7 @@ import { zygosityStates, stateSources } from './zygosity-states.js?v=zyg-13';
    :[...r.details,{title:'Association evidence',text:assoc.text,sources:[]}];
   const details=state.finding==='vus'?'':`<details class="gl-caption gl-plan-evidence"><summary>Clinical detail</summary>${sections(clinical)}</details>${r.otherGenotype&&(!multi||zst.showOtherGenotype)?`<details class="gl-caption"><summary>${escape(r.otherGenotype.title)}</summary><p class="gl-row">${escape(r.otherGenotype.text)}${cite(r.otherGenotype.sources)}</p></details>`:''}`;
   const sourceList=cited.length?`<details class="gl-caption"${r.table.inlineReferences?' data-reference-list':''}><summary>Sources</summary><ol class="gl-sourcelist">${cited.map((k,i)=>`<li${r.table.inlineReferences?' id="gl-reference-'+(i+1)+'" tabindex="-1"':''}><a class="gl-source" href="${src(k).url}" target="_blank" rel="noopener noreferrer">${escape(src(k).label)} ↗</a></li>`).join('')}</ol></details>`:'';
-  return `<button type="button" class="gl-back" data-back="true">All genes</button><div class="gl-titleline"><h2>${g.symbol}</h2></div><p class="gl-atm-genotype">${zst?escape(g.sub):escape(r.genotype)} · ${panel[g.symbol].transcript}</p>${zswitch}${zst?'':`<p class="gl-risk-note" role="note">${escape(reviewNotice)}</p>`}<div class="gl-body" aria-live="polite">${body}${details}${sourceList}${zst?`<p class="gl-risk-note gl-review-notice" role="note">${escape(reviewNotice)}</p>`:''}</div>`;
+  return `<button type="button" class="gl-back" data-back="true">All genes</button><div class="gl-titleline"><h2>${g.symbol}</h2></div><p class="gl-atm-genotype">${zst?escape(g.sub):escape(r.genotype)} · ${panel[g.symbol].transcript}</p>${zswitch}<div class="gl-body" aria-live="polite">${body}${details}${sourceList}</div>`;
  }
  function renderDetail(){
   const matches=filtered();const box=root.querySelector('#gl-detail');
